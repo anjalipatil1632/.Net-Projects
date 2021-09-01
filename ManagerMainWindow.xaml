@@ -1,0 +1,105 @@
+﻿<Window x:Class="EmployeeTravelBookingWPF.ManagerMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingWPF"
+        mc:Ignorable="d"
+          Title="ManagerWindow" Height="688.299" Width="1180.598" FontSize="24" Loaded="Window_Loaded">
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="704*"/>
+            <ColumnDefinition Width="325*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Manager " Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="172" FontSize="36" FontFamily="Schneidler Blk BT"/>
+        <Separator HorizontalAlignment="Left" Height="23" Margin="0,55,0,0" VerticalAlignment="Top" Width="1180" Grid.ColumnSpan="2" Background="#FFFDF7F7"/>
+
+        <TabControl HorizontalAlignment="Left" Height="562" VerticalAlignment="Top" Width="1173" Margin="0,78,0,0" Grid.ColumnSpan="2" FontSize="16">
+            <TabItem Header="New Request" Margin="-2,0,-26,0">
+                <DockPanel>
+                    <DataGrid x:Name="grdNewRequest" AutoGenerateColumns="False" ColumnWidth="*" Width="1150" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding RequestId}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding RequestDate}"/>
+                            <DataGridTextColumn Header="FromLocation" Binding="{Binding FromLocation}"/>
+                            <DataGridTextColumn Header="ToLocation" Binding="{Binding ToLocation}"/>
+                            <DataGridTextColumn Header="Medium" Binding="{Binding Medium}"/>
+                            <DataGridTextColumn Header="UserId" Binding="{Binding UserId}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding CurrentStatus}"/>
+                            <DataGridTextColumn Header="Manager Status" Binding="{Binding ManagerStatus}"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <Button  Margin="8" x:Name="btnApprove1" Content="Approve" Click="btnApprove1_Click" />
+
+                                            <Button  x:Name="btnReject1" Content="Reject" Click="btnReject1_Click" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="Approved request" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="225" Margin="32,0,-32,0">
+                <DockPanel>
+                    <DataGrid x:Name="grdApprovedRequest" AutoGenerateColumns="False" ColumnWidth="*" Width="1150" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding RequestId}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding RequestDate}"/>
+                            <DataGridTextColumn Header="FromLocation" Binding="{Binding FromLocation}"/>
+                            <DataGridTextColumn Header="ToLocation" Binding="{Binding ToLocation}"/>
+                            <DataGridTextColumn Header="Medium" Binding="{Binding Medium}"/>
+                            <DataGridTextColumn Header="UserId" Binding="{Binding UserId}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding CurrentStatus}"/>
+                            <DataGridTextColumn Header="Manager Status" Binding="{Binding ManagerStatus}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Rejected request" HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="200" Margin="37,0,-37,0">
+                <DockPanel>
+                    <DataGrid x:Name="grdRejectedRequest" AutoGenerateColumns="False" ColumnWidth="*" Width="1150" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding RequestId}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding RequestDate}"/>
+                            <DataGridTextColumn Header="FromLocation" Binding="{Binding FromLocation}"/>
+                            <DataGridTextColumn Header="ToLocation" Binding="{Binding ToLocation}"/>
+                            <DataGridTextColumn Header="Medium" Binding="{Binding Medium}"/>
+                            <DataGridTextColumn Header="UserId" Binding="{Binding UserId}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding CurrentStatus}"/>
+                            <DataGridTextColumn Header="Manager Status" Binding="{Binding ManagerStatus}"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="History" HorizontalAlignment="Left" Width="96" Margin="44,0,-44,0" Height="44" VerticalAlignment="Bottom">
+                <DockPanel>
+                    <DataGrid x:Name="grdHistory" AutoGenerateColumns="False" ColumnWidth="*" Width="1150" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding RequestId}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding RequestDate}"/>
+                            <DataGridTextColumn Header="FromLocation" Binding="{Binding FromLocation}"/>
+                            <DataGridTextColumn Header="ToLocation" Binding="{Binding ToLocation}"/>
+                            <DataGridTextColumn Header="Medium" Binding="{Binding Medium}"/>
+                            <DataGridTextColumn Header="UserId" Binding="{Binding UserId}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding CurrentStatus}"/>
+                            <DataGridTextColumn Header="Manager Status" Binding="{Binding ManagerStatus}"/>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+        <Button Content="Exit" Grid.Column="1" HorizontalAlignment="Left" Margin="274.8,83,0,0" VerticalAlignment="Top" Width="86" Height="46" Background="{x:Null}" Foreground="#DDFFFFFF" FontSize="18" BorderBrush="{x:Null}" Click="Button_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="EmployeeTravelBookingWPF.EmployeeMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingWPF"
+        mc:Ignorable="d"
+        Title="EmployeeMainWindow" Height="450" Width="900">
+    <Window.Background>
+        <ImageBrush ImageSource="Images\photo 10.jpg"></ImageBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Margin="35,30,0,0"
+            FontSize="25"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Run Text="Welcome,
+                 "/>
+        </TextBlock>
+
+
+
+        <Frame x:Name="Main" Margin="266,74,-0.8,-308.8" />
+        
+        <Button x:Name="btncheckstatus" HorizontalContentAlignment="Left" Content="Current Request/Check Status" HorizontalAlignment="Left" Height="28" Margin="0,111,0,-27.8" VerticalAlignment="Top" Width="284" FontSize="16" FontFamily="Sylfaen" Background="{x:Null}" BorderBrush="{x:Null}" Click="btncheckstatus_Click" Foreground="#DD000000" FontWeight="Bold"/>
+        <Button x:Name="btnraisenewticket" HorizontalContentAlignment="Left" Content="Raise New Ticket" HorizontalAlignment="Left" Height="28" Margin="0,163,0,-79.8" VerticalAlignment="Top" Width="185" FontSize="16" FontFamily="Sylfaen" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnraisenewticket_Click" Foreground="#DD000000" FontWeight="Bold"/>
+        <Button x:Name="btncancelticket" HorizontalContentAlignment="Left"  Content="Cancel Ticket" HorizontalAlignment="Left" Height="28" Margin="0,210,0,-126.8" VerticalAlignment="Top" Width="185" FontSize="16" FontFamily="Sylfaen" Background="{x:Null}" BorderBrush="{x:Null}" Click="btncancelticket_Click" Foreground="#DD000000" FontWeight="Bold"/>
+        <Button x:Name="btnexit" Content="Exit" HorizontalAlignment="Left" Height="31" Margin="-67,255,0,-174.8" VerticalAlignment="Top" Width="195" FontSize="16" FontFamily="Sylfaen" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" Foreground="#DD000000" FontWeight="Bold"/>
+        <TextBox x:Name="txtuser" HorizontalAlignment="Left" Height="44" Margin="150,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229" TextChanged="txtuser_TextChanged" BorderBrush="{x:Null}" FontSize="25" FontWeight="Bold" Text="Anjalip "/>
+
+    </Grid>
+</Window>

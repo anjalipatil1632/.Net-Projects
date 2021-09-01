@@ -1,0 +1,21 @@
+﻿<Window x:Class="EmployeeTravelBookingWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingWPF"
+        mc:Ignorable="d"
+         Title="WelcomeWindow" Height="550" Width="900">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/photo 8.jpeg"/>
+    </Window.Background>
+    <Grid>
+        <Label Content="Welcome To " HorizontalAlignment="Left" Margin="79,164,0,0" VerticalAlignment="Top" Height="59" Width="190" FontSize="30" FontWeight="Bold" Foreground="#FFFCFAFA"/>
+        <Label Content="Employees Travel" HorizontalAlignment="Left" Margin="60,202,0,0" VerticalAlignment="Top" FontSize="40" Foreground="White" FontWeight="Bold" FontFamily="Segoe Script"/>
+        <Button x:Name="Btnemployees" Content="Employee" HorizontalAlignment="Left" Margin="660,187,0,0" VerticalAlignment="Top" Width="154" Height="51" FontSize="23" FontFamily="Sitka Text" Click="Btnemployees_Click" Background="#FF1B3CED" Foreground="White"/>
+        <Button x:Name="btnmanager" Content="Manager" HorizontalAlignment="Left" Margin="660,264,0,0" VerticalAlignment="Top" Width="154" Height="56" FontSize="23" FontFamily="Sitka Text" Click="btnmanager_Click" Background="#FF1B3CED" Foreground="White"/>
+        <Button x:Name="btntravelagent" Content="Travel Agent" HorizontalAlignment="Left" Margin="660,346,0,0" VerticalAlignment="Top" Width="154" Height="53" FontSize="23" FontFamily="Sitka Text" Click="btntravelagent_Click" Background="#FF1B3CED" Foreground="White"/>
+        <Button x:Name="btnadmin" Content="Admin" HorizontalAlignment="Left" Margin="660,422,0,0" VerticalAlignment="Top" Width="154" Height="50" FontSize="23" FontFamily="Stitka Text" Click="btnadmin_Click" Background="#FF1B3CED" Foreground="White"/>
+        <Label Content="Booking Agency" HorizontalAlignment="Left" Margin="60,250,0,0" VerticalAlignment="Top" FontSize="40" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold"/>
+    </Grid>
+</Window>
