@@ -1,0 +1,123 @@
+﻿<Window x:Class="EmployeeTravelBookingSystemWPF.EmployeeOperationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingSystemWPF"
+        mc:Ignorable="d"
+        Title="Employee" Height="450" Width="800">
+    <Grid Background="CadetBlue">
+        <Frame x:Name="Main" Margin="0,71,-0.4,0" NavigationUIVisibility="Hidden" Background="WhiteSmoke"/>
+        <Label 
+            Name="Label1"
+            Content="Login ID" 
+            HorizontalAlignment="Left" 
+            Margin="191,118,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="20"
+            FontFamily="Helvetica" Height="40"
+            />
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="32" 
+            Margin="404,108,0,0" 
+            TextWrapping="Wrap" 
+            Name="txtlogin"
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="175"/>
+        <Label 
+            Name="Label2"
+            Content="Password" 
+            HorizontalAlignment="Left" 
+            Margin="191,158,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="20"
+            FontFamily="Helvetica" Height="40"
+            />
+        <PasswordBox 
+            HorizontalAlignment="Left" 
+            Height="35" 
+            Margin="404,145,0,0" 
+            
+            Name="txtpassword"
+            
+            VerticalAlignment="Top" 
+            Width="175"/>
+        <Label 
+            Name="Label3"
+            Content="Employee Type" 
+            HorizontalAlignment="Left" 
+            Margin="191,198,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="20"
+            FontFamily="Helvetica" Height="40"
+            />
+        <ComboBox 
+            HorizontalAlignment="Left" 
+            Margin="404,185,0,0" 
+            VerticalAlignment="Top" 
+            Width="175" 
+            Height="40"
+            Name="comboemptype"
+            >
+            <ComboBoxItem Content="1 " />
+            <ComboBoxItem Content="2 " />
+        </ComboBox>
+        <Label 
+            Name="Label4"
+            Content="Employee Name" 
+            HorizontalAlignment="Left" 
+            Margin="191,248,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="20"
+            FontFamily="Helvetica"
+            />
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="40" 
+            Margin="404,230,0,0" 
+            TextWrapping="Wrap" 
+            Name="txtname"
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="175"/>
+        <Button
+            
+            Name="AddButton"
+            Content="Add Details"
+            Margin="191,308,439.6,68"
+            Background="#FFE5E5E5"
+            FontSize="20"
+            FontFamily="Helvetica" Click="AddButton_Click" Height="Auto" Foreground="#DD000000" BorderBrush="White"
+            />
+        <Button
+            
+            Name="ViewButton"
+            Content="View Details"
+            Margin="404,308,214.6,68"
+            Background="#FFE5E5E5"
+            FontSize="20"
+            FontFamily="Helvetica" Click="ViewButton_Click" Foreground="#DD000000" Height="Auto" BorderBrush="White" 
+            />
+        <Button 
+            Name="BackButton"
+            Content="Back" 
+            HorizontalAlignment="Left" 
+            Margin="683,377,0,0" 
+            VerticalAlignment="Top" 
+            Width="101" 
+            Height="33"
+            FontFamily="Helvetica"
+            FontSize="20"
+            Background="{x:Null}" Click="BackButton_Click" Foreground="#DD0E0E0E" BorderBrush="{x:Null}" 
+            />
+        <Button Content="Log Out" HorizontalAlignment="Left" Margin="683,10,0,0" VerticalAlignment="Top" Width="101" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#DDF4F4F4" Click="Button_Click"/>
+        <Label Content="Enter Following Details To add new Employee:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+
+    </Grid>
+</Window>

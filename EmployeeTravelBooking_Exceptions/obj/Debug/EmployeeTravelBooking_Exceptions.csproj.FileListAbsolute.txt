@@ -1,0 +1,6 @@
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\bin\Debug\EmployeeTravelBooking_Exceptions.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\bin\Debug\EmployeeTravelBooking_Exceptions.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\obj\Debug\EmployeeTravelBooking_Exceptions.csproj.CoreCompileInputs.cache
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\obj\Debug\EmployeeTravelBooking_Exceptions.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\obj\Debug\EmployeeTravelBooking_Exceptions.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_Exceptions\obj\Debug\EmployeeTravelBooking_Exceptions.csprojAssemblyReference.cache

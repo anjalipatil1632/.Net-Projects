@@ -1,0 +1,18 @@
+﻿<Page x:Class="EmployeeTravelBookingSystemWPF.CancelPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EmployeeTravelBookingSystemWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="CancelPage">
+
+    <Grid Background="WhiteSmoke" >
+        <Label Content="Enter Request ID" HorizontalAlignment="Left" Margin="270,77,0,0" VerticalAlignment="Top" Height="47" Width="146" FontSize="18"/>
+        <TextBox x:Name="txtrequestbox" HorizontalAlignment="Left" Height="36" Margin="421,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" FontSize="18" PreviewTextInput="txtrequestbox_PreviewTextInput"/>
+        <Button x:Name="btncancel" Content="Cancel Request" HorizontalAlignment="Left" Margin="270,152,0,0" VerticalAlignment="Top" Width="362" Height="45" FontSize="18" Background="Snow" Foreground="Black" BorderBrush="#FFF9695F" OpacityMask="#FF882C2C" Opacity="0.8" Click="btncancel_Click"/>
+        <Label Content="*Note: Before canceling raised ticket check current status of the ticket.If ticket is Confirmed you can not cancel that ticket* " HorizontalAlignment="Left" Margin="141,10,-19,0" VerticalAlignment="Top" Height="27" Width="878" Foreground="#FFF72828" FontSize="13"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,20 @@
+﻿EmployeeTravelBookingSystemWPF
+
+
+winexe
+C#
+.cs
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBookingSystemWPF\obj\Debug\
+EmployeeTravelBookingSystemWPF
+none
+false
+DEBUG;TRACE
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBookingSystemWPF\App.xaml
+21-1336700950
+31436792824
+27-1386719728
+18-433014453
+AddPage.xaml;AdminLoginForm.xaml;AdminMainWindow.xaml;CancelPage.xaml;EmployeeDetails.xaml;EmployeeLoginFormPL.xaml;EmployeeMainWindow.xaml;EmployeeOperationWindow.xaml;MainWindow.xaml;ManagerDetails.xaml;ManagerLoginForm.xaml;ManagerMainWindow.xaml;ManagerOperationWIndow.xaml;OnlyEmployeeDetails.xaml;TravelAgentDetails.xaml;TravelAgentLoginForm.xaml;TravelAgentMainWindow.xaml;TravelAgentOperationWindow.xaml;UpdateEmployee.xaml;UpdateTravelAgent.xaml;View.xaml;
+
+True
+

@@ -1,0 +1,95 @@
+﻿<Window x:Class="EmployeeTravelBookingSystemWPF.ManagerOperationWIndow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingSystemWPF"
+        mc:Ignorable="d"
+         Title="Manager" Height="450" Width="800">
+    <Grid Background="CadetBlue">
+        <Frame x:Name="Main" Margin="0,71,-0.4,0" NavigationUIVisibility="Hidden" Background="WhiteSmoke"/>
+        <Label 
+            Name="Label1"
+            Content="Employee ID" 
+            HorizontalAlignment="Left" 
+            Margin="242,133,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="18"
+            FontFamily="Helvetica" Height="40"
+            />
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="37" 
+            Margin="396,121,0,0" 
+            TextWrapping="Wrap" 
+            Name="txtuserid"
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="175" RenderTransformOrigin="0.485,0.102" FontSize="18"
+            />
+        <Label 
+            Name="Label2"
+            Content="Manager ID" 
+            HorizontalAlignment="Left" 
+            Margin="242,173,0,0" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="-5.025,-1.192"
+            FontSize="18"
+            FontFamily="Helvetica" Height="40"
+            />
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="41" 
+            Margin="396,163,0,0" 
+            TextWrapping="Wrap" 
+            Name="txtmanagerid"
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="175" FontSize="18"/>
+        <Button
+            
+            Name="AssignButton"
+            Content="Assign Manager"
+            Margin="172,242,425.6,146"
+            Background="#FFE5E5E5"
+            FontSize="18"
+            FontFamily="Helvetica" Click="AssignButton_Click" Foreground="#DD000000" BorderBrush="White"
+            />
+        <Button
+            
+            Name="ViewButton"
+            Content="View Manager Details"
+            Margin="142,293,425.6,91"
+            Background="#FFE5E5E5"
+            FontSize="18"
+            FontFamily="Helvetica" Click="ViewButton_Click" BorderBrush="White" Foreground="#DD000000" Height="Auto"
+            />
+        <Button
+            
+            Name="ChangeButton"
+            Content="Change Manager"
+            Margin="416,242,165.6,146"
+            Background="#FFE5E5E5"
+            FontSize="18"
+            FontFamily="Helvetica" Click="ChangeButton_Click" BorderBrush="White" Foreground="#DD000000"
+            />
+        <Button 
+            Name="BackButton"
+            Content="Back" 
+            HorizontalAlignment="Left" 
+            Margin="693,369,-0.4,0" 
+            VerticalAlignment="Top" 
+            Width="101" 
+            Height="41"
+            FontFamily="Helvetica"
+            FontSize="20"
+            Background="{x:Null}" Click="BackButton_Click" BorderBrush="{x:Null}" Foreground="#DD000000"  
+            />
+        <Button Content="Log out" HorizontalAlignment="Left" Margin="683,10,0,0" VerticalAlignment="Top" Width="101" Foreground="#DDFFFFFF" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button Content="View Employee Details"  Background="#FFE5E5E5"
+            FontSize="18"
+            FontFamily="Helvetica" HorizontalAlignment="Left" Margin="416,297,0,0"  BorderBrush="White" Foreground="#DD000000" VerticalAlignment="Top" Width="237" Click="Button_Click"/>
+
+    </Grid>
+</Window>

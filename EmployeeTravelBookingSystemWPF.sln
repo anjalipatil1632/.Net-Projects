@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTravelBookingSystemWPF", "EmployeeTravelBookingSystemWPF\EmployeeTravelBookingSystemWPF.csproj", "{FE7FCFB7-F416-4DB5-ABC9-C9AF98CEA7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTravelBookingBEL", "EmployeeTravelBookingBAL\EmployeeTravelBookingBEL.csproj", "{0500C300-568A-4972-8756-3EF1A61573EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTravelBooking_BAL", "EmployeeTravelBooking_BAL\EmployeeTravelBooking_BAL.csproj", "{CAB9095D-33A2-4629-AF5F-07B095945A70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTravelBooking_DAL", "EmployeeTravelBooking_DAL\EmployeeTravelBooking_DAL.csproj", "{864A42FD-E905-45E2-89F5-7529E943435B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTravelBooking_Exceptions", "EmployeeTravelBooking_Exceptions\EmployeeTravelBooking_Exceptions.csproj", "{39EDE50D-0A81-494D-B720-4A36CDA4B5D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestEmployeeTravelBookingSystem", "UnitTestEmployeeTravelBookingSystem\UnitTestEmployeeTravelBookingSystem.csproj", "{C5C77B13-32CA-433F-936E-A7650AE2889A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE7FCFB7-F416-4DB5-ABC9-C9AF98CEA7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7FCFB7-F416-4DB5-ABC9-C9AF98CEA7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7FCFB7-F416-4DB5-ABC9-C9AF98CEA7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7FCFB7-F416-4DB5-ABC9-C9AF98CEA7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0500C300-568A-4972-8756-3EF1A61573EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0500C300-568A-4972-8756-3EF1A61573EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0500C300-568A-4972-8756-3EF1A61573EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0500C300-568A-4972-8756-3EF1A61573EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB9095D-33A2-4629-AF5F-07B095945A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB9095D-33A2-4629-AF5F-07B095945A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB9095D-33A2-4629-AF5F-07B095945A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB9095D-33A2-4629-AF5F-07B095945A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864A42FD-E905-45E2-89F5-7529E943435B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864A42FD-E905-45E2-89F5-7529E943435B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864A42FD-E905-45E2-89F5-7529E943435B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864A42FD-E905-45E2-89F5-7529E943435B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EDE50D-0A81-494D-B720-4A36CDA4B5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EDE50D-0A81-494D-B720-4A36CDA4B5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EDE50D-0A81-494D-B720-4A36CDA4B5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EDE50D-0A81-494D-B720-4A36CDA4B5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5C77B13-32CA-433F-936E-A7650AE2889A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C77B13-32CA-433F-936E-A7650AE2889A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5C77B13-32CA-433F-936E-A7650AE2889A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5C77B13-32CA-433F-936E-A7650AE2889A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9C7ED81-BB9C-4098-A668-6CED17FFC2B8}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_BAL.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_BAL.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBookingBAL.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_DAL.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_Exceptions.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBookingBAL.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_DAL.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\bin\Debug\EmployeeTravelBooking_Exceptions.pdb
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\obj\Debug\EmployeeTravelBooking_BAL.csprojAssemblyReference.cache
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\obj\Debug\EmployeeTravelBooking_BAL.csproj.CoreCompileInputs.cache
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\obj\Debug\EmployeeTravelBooking_BAL.csproj.CopyComplete
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\obj\Debug\EmployeeTravelBooking_BAL.dll
+D:\Capgemini Projects\Sprint 1\EmployeeTravelBookingSystemWPF\EmployeeTravelBooking_BAL\obj\Debug\EmployeeTravelBooking_BAL.pdb

@@ -1,0 +1,49 @@
+﻿<Window x:Class="EmployeeTravelBookingSystemWPF.TravelAgentDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeTravelBookingSystemWPF"
+        mc:Ignorable="d"
+        Title="Travel Agent Details" Height="550" Width="900">
+    <Grid Background="CadetBlue">
+        <Frame x:Name="Main" Margin="0,94,-0.4,-0.2" NavigationUIVisibility="Hidden" Background="WhiteSmoke"/>
+        <DataGrid x:Name="dg_result" HorizontalAlignment="Left" Height="306" Margin="83,135,0,0" VerticalAlignment="Top" Width="721" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="50" x:Name="dg_userid" Header="User Id" Binding="{Binding  UserId}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" x:Name="dg_loginid" Header="Login Id" Binding="{Binding LoginId}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" x:Name="dg_password" Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                <DataGridTextColumn Width="70" x:Name="dg_usertype" Header="User Type" Binding="{Binding UserTypeId}"></DataGridTextColumn>
+                <DataGridTextColumn Width="120" x:Name="dg_name" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" x:Name="dg_managerid" Header="Manager Id" Binding="{Binding ManagerUserId}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Update_Click">Update</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Delete_Click">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Travel Agent Details" HorizontalAlignment="Left" Margin="324,24,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Times New Roman"/>
+        <Button 
+            Name="BackButton"
+            Content="Back" 
+            HorizontalAlignment="Left" 
+            Margin="776,469,0,0" 
+            VerticalAlignment="Top" 
+            Width="101" 
+            Height="37"
+            FontFamily="Helvetica"
+            FontSize="20"
+            Background="{x:Null}" Click="BackButton_Click" BorderBrush="{x:Null}" Foreground="#DD000000"  
+            />
+    </Grid>
+</Window>
