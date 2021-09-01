@@ -1,0 +1,80 @@
+﻿@model IEnumerable<EmployeeTravelBookingSystem_MVC.Models.TravelClass>
+
+@{
+    ViewBag.Title = "TravelAgent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<center>
+    <h3><u>TravelAgent Information</u></h3>
+</center>
+<br />
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href='@Url.Action("CreateTravelAgent", "TravelMVC")' class="btn btn-success">Add New TravelAgent</a>
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Salt)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.UserTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ManagerUserId)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Ticket_Count)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Salt)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.UserTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ManagerUserId)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Ticket_Count)
+        </td>*@
+        <td>
+            @Html.ActionLink("Update", "UpdateTravelAgent", new {  id=item.UserId },new { @class = "btn btn-primary btn-sm" }) |
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Delete", "DeleteTravelAgent", new {  id=item.UserId }, new { onclick = "return confirm('Are you sure you want to delete this record?');", @class = "btn btn-primary btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

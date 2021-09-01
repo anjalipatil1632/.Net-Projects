@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sprint2dbModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TravelRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" />
+          <Property Name="FromLocation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ToLocation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Medium" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CurrentStatus" Type="varchar" MaxLength="30" />
+          <Property Name="ManagerStatus" Type="varchar" MaxLength="10" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginId" Type="nvarchar" MaxLength="40" />
+          <Property Name="Password" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="70" />
+          <Property Name="UserTypeId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ManagerUserId" Type="int" />
+          <Property Name="Ticket_Count" Type="int" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_userID_TravelRequests_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TravelRequests" Type="Self.TravelRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TravelRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTypeID_Users_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddTravelRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromlocation" Type="varchar" Mode="In" />
+          <Parameter Name="tolocation" Type="varchar" Mode="In" />
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="medium" Type="varchar" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAdminCheckLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spApprovedRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spCancelTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="requestid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEmpCheckLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetNewRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="managerid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spGetNewRequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="managerid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spGetRecordsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetTravelRequestDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spHistoryRecords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spManagerCheckLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spRejectedRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spTravelAgentCheckLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateApproveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+          <Parameter Name="ManagerStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateRejectRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Sprint2dbModel1StoreContainer">
+          <EntitySet Name="TravelRequests" EntityType="Self.TravelRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_userID_TravelRequests_Users" Association="Self.FK_userID_TravelRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TravelRequests" EntitySet="TravelRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTypeID_Users_UserType" Association="Self.FK_userTypeID_Users_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sprint2dbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TravelRequest">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestDate" Type="DateTime" Precision="3" />
+          <Property Name="FromLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ToLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Medium" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="TravelRequests" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ManagerUserId" Type="Int32" />
+          <Property Name="Ticket_Count" Type="Int32" />
+          <NavigationProperty Name="TravelRequests" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="Users" ToRole="TravelRequests" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="Users" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="UserType" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_userID_TravelRequests_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TravelRequests" Type="Self.TravelRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TravelRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTypeID_Users_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sprint2dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TravelRequests" EntityType="Self.TravelRequest" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_userID_TravelRequests_Users" Association="Self.FK_userID_TravelRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TravelRequests" EntitySet="TravelRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTypeID_Users_UserType" Association="Self.FK_userTypeID_Users_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="AddTravelRequest">
+            <Parameter Name="fromlocation" Mode="In" Type="String" />
+            <Parameter Name="tolocation" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="medium" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAdminCheckLoginDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spApprovedRequest" ReturnType="Collection(Sprint2dbModel1.spApprovedRequest_Result)" />
+          <FunctionImport Name="spCancelTicket">
+            <Parameter Name="requestid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEmpCheckLoginDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetNewRequest" ReturnType="Collection(Sprint2dbModel1.spGetNewRequest_Result)">
+            <Parameter Name="managerid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetNewRequests" ReturnType="Collection(Sprint2dbModel1.spGetNewRequests_Result)">
+            <Parameter Name="managerid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetRecordsById" ReturnType="Collection(Sprint2dbModel1.spGetRecordsById_Result)">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetTravelRequestDetails" ReturnType="Collection(Sprint2dbModel1.spGetTravelRequestDetails_Result)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spHistoryRecords" ReturnType="Collection(Sprint2dbModel1.spHistoryRecords_Result)" />
+          <FunctionImport Name="spManagerCheckLoginDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spRejectedRequest" ReturnType="Collection(Sprint2dbModel1.spRejectedRequest_Result)" />
+          <FunctionImport Name="spTravelAgentCheckLoginDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateApproveRequest">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+            <Parameter Name="ManagerStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateRejectRequest">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spApprovedRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetNewRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetNewRequests_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetRecordsById_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetTravelRequestDetails_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spHistoryRecords_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spRejectedRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Sprint2dbModel1StoreContainer" CdmEntityContainer="Sprint2dbEntities1">
+          <EntitySetMapping Name="TravelRequests">
+            <EntityTypeMapping TypeName="Sprint2dbModel1.TravelRequest">
+              <MappingFragment StoreEntitySet="TravelRequests">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Sprint2dbModel1.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+                <ScalarProperty Name="Ticket_Count" ColumnName="Ticket_Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="Sprint2dbModel1.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddTravelRequest" FunctionName="Sprint2dbModel1.Store.AddTravelRequest" />
+          <FunctionImportMapping FunctionImportName="spAdminCheckLoginDetails" FunctionName="Sprint2dbModel1.Store.spAdminCheckLoginDetails" />
+          <FunctionImportMapping FunctionImportName="spApprovedRequest" FunctionName="Sprint2dbModel1.Store.spApprovedRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spApprovedRequest_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spCancelTicket" FunctionName="Sprint2dbModel1.Store.spCancelTicket" />
+          <FunctionImportMapping FunctionImportName="spEmpCheckLoginDetails" FunctionName="Sprint2dbModel1.Store.spEmpCheckLoginDetails" />
+          <FunctionImportMapping FunctionImportName="spGetNewRequest" FunctionName="Sprint2dbModel1.Store.spGetNewRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spGetNewRequest_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetNewRequests" FunctionName="Sprint2dbModel1.Store.spGetNewRequests">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spGetNewRequests_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetRecordsById" FunctionName="Sprint2dbModel1.Store.spGetRecordsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spGetRecordsById_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetTravelRequestDetails" FunctionName="Sprint2dbModel1.Store.spGetTravelRequestDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spGetTravelRequestDetails_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spHistoryRecords" FunctionName="Sprint2dbModel1.Store.spHistoryRecords">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spHistoryRecords_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spManagerCheckLoginDetails" FunctionName="Sprint2dbModel1.Store.spManagerCheckLoginDetails" />
+          <FunctionImportMapping FunctionImportName="spRejectedRequest" FunctionName="Sprint2dbModel1.Store.spRejectedRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Sprint2dbModel1.spRejectedRequest_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spTravelAgentCheckLoginDetails" FunctionName="Sprint2dbModel1.Store.spTravelAgentCheckLoginDetails" />
+          <FunctionImportMapping FunctionImportName="spUpdateApproveRequest" FunctionName="Sprint2dbModel1.Store.spUpdateApproveRequest" />
+          <FunctionImportMapping FunctionImportName="spUpdateRejectRequest" FunctionName="Sprint2dbModel1.Store.spUpdateRejectRequest" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

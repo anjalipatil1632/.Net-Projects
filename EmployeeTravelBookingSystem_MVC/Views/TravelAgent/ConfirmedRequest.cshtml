@@ -1,0 +1,97 @@
+﻿@model IEnumerable<EmployeeTravelBookingSystem_MVC.Models.TravelRequestEmp>
+
+@{
+    ViewBag.Title = "ConfirmedRequest";
+    Layout = "~/Views/Shared/_TravelAgentLayout.cshtml";
+}
+<br />
+<center>
+    <h2><u>Confirmed Travel Requests</u></h2>
+</center>
+<br />
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medium)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManagerStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManagerId)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+
+</table>

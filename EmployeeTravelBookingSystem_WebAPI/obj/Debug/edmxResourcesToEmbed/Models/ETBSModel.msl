@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Sprint2dbModelStoreContainer" CdmEntityContainer="EmployeeTravelBookingSystemEntities">
+    <EntitySetMapping Name="TravelRequests">
+      <EntityTypeMapping TypeName="Sprint2dbModel.TravelRequest">
+        <MappingFragment StoreEntitySet="TravelRequests">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Sprint2dbModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+          <ScalarProperty Name="Ticket_Count" ColumnName="Ticket_Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="Sprint2dbModel.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddTravelRequest" FunctionName="Sprint2dbModel.Store.AddTravelRequest" />
+    <FunctionImportMapping FunctionImportName="spAdminCheckLoginDetails" FunctionName="Sprint2dbModel.Store.spAdminCheckLoginDetails" />
+    <FunctionImportMapping FunctionImportName="spApprovedRequest" FunctionName="Sprint2dbModel.Store.spApprovedRequest">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spApprovedRequest_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spCancelTicket" FunctionName="Sprint2dbModel.Store.spCancelTicket" />
+    <FunctionImportMapping FunctionImportName="spEmpCheckLoginDetails" FunctionName="Sprint2dbModel.Store.spEmpCheckLoginDetails" />
+    <FunctionImportMapping FunctionImportName="spGetNewRequest" FunctionName="Sprint2dbModel.Store.spGetNewRequest">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spGetNewRequest_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetNewRequests" FunctionName="Sprint2dbModel.Store.spGetNewRequests">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spGetNewRequests_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetRecordsById" FunctionName="Sprint2dbModel.Store.spGetRecordsById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spGetRecordsById_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetTravelRequestDetails" FunctionName="Sprint2dbModel.Store.spGetTravelRequestDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spGetTravelRequestDetails_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spHistoryRecords" FunctionName="Sprint2dbModel.Store.spHistoryRecords">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spHistoryRecords_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spManagerCheckLoginDetails" FunctionName="Sprint2dbModel.Store.spManagerCheckLoginDetails" />
+    <FunctionImportMapping FunctionImportName="spRejectedRequest" FunctionName="Sprint2dbModel.Store.spRejectedRequest">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.spRejectedRequest_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spTravelAgentCheckLoginDetails" FunctionName="Sprint2dbModel.Store.spTravelAgentCheckLoginDetails" />
+    <FunctionImportMapping FunctionImportName="spUpdateApproveRequest" FunctionName="Sprint2dbModel.Store.spUpdateApproveRequest" />
+    <FunctionImportMapping FunctionImportName="spUpdateRejectRequest" FunctionName="Sprint2dbModel.Store.spUpdateRejectRequest" />
+    <FunctionImportMapping FunctionImportName="AddEmployee" FunctionName="Sprint2dbModel.Store.AddEmployee" />
+    <FunctionImportMapping FunctionImportName="addmanager" FunctionName="Sprint2dbModel.Store.addmanager" />
+    <FunctionImportMapping FunctionImportName="AssignManager" FunctionName="Sprint2dbModel.Store.AssignManager" />
+    <FunctionImportMapping FunctionImportName="ChangeManager" FunctionName="Sprint2dbModel.Store.ChangeManager" />
+    <FunctionImportMapping FunctionImportName="DeleteEmp" FunctionName="Sprint2dbModel.Store.DeleteEmp" />
+    <FunctionImportMapping FunctionImportName="DeleteManager" FunctionName="Sprint2dbModel.Store.DeleteManager" />
+    <FunctionImportMapping FunctionImportName="GetEmpDetails" FunctionName="Sprint2dbModel.Store.GetEmpDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetEmpDetails_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetManager" FunctionName="Sprint2dbModel.Store.GetManager">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetManager_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUser" FunctionName="Sprint2dbModel.Store.GetUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetUser_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUser1" FunctionName="Sprint2dbModel.Store.GetUser1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetUser1_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateEmp" FunctionName="Sprint2dbModel.Store.UpdateEmp" />
+    <FunctionImportMapping FunctionImportName="UpdateManager" FunctionName="Sprint2dbModel.Store.UpdateManager" />
+    <FunctionImportMapping FunctionImportName="UserDetails" FunctionName="Sprint2dbModel.Store.UserDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.UserDetails_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ViewEmpDetails" FunctionName="Sprint2dbModel.Store.ViewEmpDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.ViewEmpDetails_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ViewManagerDetails" FunctionName="Sprint2dbModel.Store.ViewManagerDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.ViewManagerDetails_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ViewTravelAgentDetails" FunctionName="Sprint2dbModel.Store.ViewTravelAgentDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.ViewTravelAgentDetails_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ChangeTravelStatus" FunctionName="Sprint2dbModel.Store.ChangeTravelStatus" />
+    <FunctionImportMapping FunctionImportName="ConfirmedTicket" FunctionName="Sprint2dbModel.Store.ConfirmedTicket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.ConfirmedTicket_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDetails" FunctionName="Sprint2dbModel.Store.GetDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetDetails_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_TravelRequests_Travelagent" FunctionName="Sprint2dbModel.Store.usp_TravelRequests_Travelagent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.usp_TravelRequests_Travelagent_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="addtravelagent" FunctionName="Sprint2dbModel.Store.addtravelagent" />
+    <FunctionImportMapping FunctionImportName="DeleteTravelAgent" FunctionName="Sprint2dbModel.Store.DeleteTravelAgent" />
+    <FunctionImportMapping FunctionImportName="GetTravelAgent" FunctionName="Sprint2dbModel.Store.GetTravelAgent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.GetTravelAgent_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateTravelAgent" FunctionName="Sprint2dbModel.Store.UpdateTravelAgent" />
+    <FunctionImportMapping FunctionImportName="AddEmployee1" FunctionName="Sprint2dbModel.Store.AddEmployee1" />
+    <FunctionImportMapping FunctionImportName="countTicket" FunctionName="Sprint2dbModel.Store.countTicket" />
+    <FunctionImportMapping FunctionImportName="getCount" FunctionName="Sprint2dbModel.Store.getCount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.getCount_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+          <ScalarProperty Name="Ticket_Count" ColumnName="Ticket_Count" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getCount1" FunctionName="Sprint2dbModel.Store.getCount1" />
+    <FunctionImportMapping FunctionImportName="MyUser" FunctionName="Sprint2dbModel.Store.MyUser" />
+    <FunctionImportMapping FunctionImportName="ChangeTravelStatus1" FunctionName="Sprint2dbModel.Store.ChangeTravelStatus1" />
+    <FunctionImportMapping FunctionImportName="viewCancel" FunctionName="Sprint2dbModel.Store.viewCancel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Sprint2dbModel.viewCancel_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+          <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Medium" ColumnName="Medium" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

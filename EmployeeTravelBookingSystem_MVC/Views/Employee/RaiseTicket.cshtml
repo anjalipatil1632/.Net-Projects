@@ -1,0 +1,117 @@
+﻿@model EmployeeTravelBookingSystem_MVC.Models.TravelRequestEmp
+
+@{
+    ViewBag.Title = "RaiseTicket";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+
+
+    <h4><b>Welcome @Session["UserName"].ToString()</b></h4><br />
+<h3>
+    <center>
+        <u>Enter Following Details To Raise Your Travelling Ticket Successfully</u>
+</h3><hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.FromLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FromLocation, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                    @Html.ValidationMessageFor(model => model.FromLocation, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.ToLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ToLocation, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                    @Html.ValidationMessageFor(model => model.ToLocation, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.FromDate, "{0:yyyy/mm/dd}", new { autocomplete = "off", id = "fromdate", @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ToDate, "{0:yyyy/mm/dd}", new { autocomplete = "off", id = "todate", @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*@Html.EditorFor(model => model.Medium, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.Medium, new SelectList(new List<string>() { "Flight", "Train" }), "Select Medium", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Medium, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-9">
+                    <input type="submit" value="Create" class="btn btn-primary form-control" />
+                </div>
+            </div>
+        </div>
+    }
+</center>
+
+<div>
+    @Html.ActionLink("Back to List", "Displaystatus")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqueryUi")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                dateFormat: 'yy/mm/dd',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+
+}
+
+
+

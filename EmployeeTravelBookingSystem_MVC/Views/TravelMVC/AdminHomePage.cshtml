@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "AdminHomePage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminHomePage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('../../Content/Images/img8.jpg');
+            /*background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('../../Content/Images/img7.jpeg');*/
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .title {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%)
+        }
+
+            .title h4 {
+                color: #fff;
+                font-size: 35px;
+            }
+
+            .title h2 {
+                color: #fff;
+                font-size: 42px;
+                font-family: 'Franklin Gothic';
+            }
+
+        .button1 {
+            position: absolute;
+            top: 55%;
+            left: 30%;
+            transform: translate(-50%,-50%)
+        }
+
+        .button2 {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%,-50%)
+        }
+
+        .button3 {
+            position: absolute;
+            top: 55%;
+            left: 70%;
+            transform: translate(-50%,-50%)
+        }
+
+        .btn {
+            border: 1px solid #fff;
+            padding: 10px 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.6s ease;
+            /*//background-color:deepskyblue;*/
+        }
+
+            .btn:hover {
+                background-color: #fff;
+                color: #000;
+            }
+    </style>
+
+</head>
+<body>
+    <header>
+        <center>
+            <div class="title">
+                <h4>Welcome to</h4>
+                <h2><b>ADMIN PAGE</b></h2>
+            </div>
+            <div class="button1">
+                <a href="~/TravelMVC/Index" class="btn">Employee</a>
+
+            </div>
+            <div class="button2">
+                <a href="~/TravelMVC/Manager" class="btn">Manager</a>
+
+            </div>
+            <div class="button3">
+                <a href="~/TravelMVC/TravelAgent" class="btn">Travel Agent</a>
+
+            </div>
+        </center>
+    </header>
+</body>
+</html>
+

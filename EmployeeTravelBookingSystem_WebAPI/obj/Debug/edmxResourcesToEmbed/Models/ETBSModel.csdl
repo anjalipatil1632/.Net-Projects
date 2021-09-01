@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Sprint2dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TravelRequest">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequestDate" Type="DateTime" Precision="3" />
+    <Property Name="FromLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ToLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="Medium" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CurrentStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ManagerStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="TravelRequests" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salt" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="UserTypeId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ManagerUserId" Type="Int32" />
+    <Property Name="Ticket_Count" Type="Int32" />
+    <NavigationProperty Name="TravelRequests" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="Users" ToRole="TravelRequests" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="Users" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="UserType" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_userID_TravelRequests_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TravelRequests" Type="Self.TravelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TravelRequests">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userTypeID_Users_UserType">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeTravelBookingSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TravelRequests" EntityType="Self.TravelRequest" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_userID_TravelRequests_Users" Association="Self.FK_userID_TravelRequests_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TravelRequests" EntitySet="TravelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userTypeID_Users_UserType" Association="Self.FK_userTypeID_Users_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="AddTravelRequest">
+      <Parameter Name="fromlocation" Mode="In" Type="String" />
+      <Parameter Name="tolocation" Mode="In" Type="String" />
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+      <Parameter Name="medium" Mode="In" Type="String" />
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spAdminCheckLoginDetails" ReturnType="Collection(Int32)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spApprovedRequest" ReturnType="Collection(Sprint2dbModel.spApprovedRequest_Result)" />
+    <FunctionImport Name="spCancelTicket">
+      <Parameter Name="requestid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEmpCheckLoginDetails" ReturnType="Collection(Int32)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGetNewRequest" ReturnType="Collection(Sprint2dbModel.spGetNewRequest_Result)">
+      <Parameter Name="managerid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGetNewRequests" ReturnType="Collection(Sprint2dbModel.spGetNewRequests_Result)">
+      <Parameter Name="managerid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGetRecordsById" ReturnType="Collection(Sprint2dbModel.spGetRecordsById_Result)">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spGetTravelRequestDetails" ReturnType="Collection(Sprint2dbModel.spGetTravelRequestDetails_Result)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spHistoryRecords" ReturnType="Collection(Sprint2dbModel.spHistoryRecords_Result)" />
+    <FunctionImport Name="spManagerCheckLoginDetails" ReturnType="Collection(Int32)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spRejectedRequest" ReturnType="Collection(Sprint2dbModel.spRejectedRequest_Result)" />
+    <FunctionImport Name="spTravelAgentCheckLoginDetails" ReturnType="Collection(Int32)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spUpdateApproveRequest">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+      <Parameter Name="ManagerStatus" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spUpdateRejectRequest">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmployee">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="addmanager">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AssignManager">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+      <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ChangeManager">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+      <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteEmp">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteManager">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmpDetails" ReturnType="Collection(Sprint2dbModel.GetEmpDetails_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetManager" ReturnType="Collection(Sprint2dbModel.GetManager_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUser" ReturnType="Collection(Sprint2dbModel.GetUser_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUser1" ReturnType="Collection(Sprint2dbModel.GetUser1_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateEmp">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateManager">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UserDetails" ReturnType="Collection(Sprint2dbModel.UserDetails_Result)" />
+    <FunctionImport Name="ViewEmpDetails" ReturnType="Collection(Sprint2dbModel.ViewEmpDetails_Result)" />
+    <FunctionImport Name="ViewManagerDetails" ReturnType="Collection(Sprint2dbModel.ViewManagerDetails_Result)" />
+    <FunctionImport Name="ViewTravelAgentDetails" ReturnType="Collection(Sprint2dbModel.ViewTravelAgentDetails_Result)" />
+    <FunctionImport Name="ChangeTravelStatus">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentStatus" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConfirmedTicket" ReturnType="Collection(Sprint2dbModel.ConfirmedTicket_Result)" />
+    <FunctionImport Name="GetDetails" ReturnType="Collection(Sprint2dbModel.GetDetails_Result)">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_TravelRequests_Travelagent" ReturnType="Collection(Sprint2dbModel.usp_TravelRequests_Travelagent_Result)" />
+    <FunctionImport Name="addtravelagent">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteTravelAgent">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetTravelAgent" ReturnType="Collection(Sprint2dbModel.GetTravelAgent_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateTravelAgent">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddEmployee1">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="countTicket">
+      <Parameter Name="LoinId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getCount" ReturnType="Collection(Sprint2dbModel.getCount_Result)">
+      <Parameter Name="LoginId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getCount1" ReturnType="Collection(Int32)">
+      <Parameter Name="LoginId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="MyUser">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="usertypeid" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ChangeTravelStatus1">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentStatus" Mode="In" Type="String" />
+      <Parameter Name="LoginId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="viewCancel" ReturnType="Collection(Sprint2dbModel.viewCancel_Result)">
+      <Parameter Name="loginid" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="spApprovedRequest_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spGetNewRequest_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spGetNewRequests_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spGetRecordsById_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spGetTravelRequestDetails_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spHistoryRecords_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spRejectedRequest_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetEmpDetails_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="GetManager_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="GetUser_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUser1_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserDetails_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ViewEmpDetails_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ViewManagerDetails_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ViewTravelAgentDetails_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ConfirmedTicket_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetDetails_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_TravelRequests_Travelagent_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetTravelAgent_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="getCount_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+    <Property Type="String" Name="Salt" Nullable="true" MaxLength="70" />
+    <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+    <Property Type="Int32" Name="Ticket_Count" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="viewCancel_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>
