@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e314551057044bb2a8423c89dfbd7a18" Name="Diagram1">
+        <EntityTypeShape EntityType="OVSModel.CityMaster" Width="1.5" PointX="12.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.CountryMaster" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.Customer" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.Dealer" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.Sale" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.Showroom" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.StateMaster" Width="1.5" PointX="10" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OVSModel.Vehicle" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="OVSModel.FK_CityMaster_StateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_StateMaster_CountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_CustomerID" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_DealerID" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_DealerID_Showroom" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_ShowroomID" ManuallyRouted="false" />
+        <AssociationConnector Association="OVSModel.FK_VehicleID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

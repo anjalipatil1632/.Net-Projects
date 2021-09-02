@@ -1,0 +1,49 @@
+﻿<Window x:Class="OnlineVehicleSystem.ShowroomControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineVehicleSystem"
+        mc:Ignorable="d"
+        Title="ShowroomControl" Loaded="Window_Loaded" Height="450" Width="800">
+    <Grid Background="Aquamarine">
+        <Label x:Name="lblCustomerName" FontSize="20" Content="Dealer" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lblCity" Content="Owner Name" FontSize="20"  HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="txtOwnerName"  Background="Azure" BorderThickness="4px" HorizontalAlignment="Left" Height="32" Margin="179,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" />
+        <Label x:Name="lblAge" Content="Contact No" FontSize="20"  HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.289,0.32" FontWeight="Bold"/>
+        <TextBox x:Name="txtContact"  HorizontalAlignment="Left" BorderThickness="4px" Background="Azure" Height="33" Margin="179,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <Label x:Name="lblPhone" Content="Address"  FontSize="20" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.493,0.909" FontWeight="Bold"/>
+        <TextBox x:Name="txtAddress"  HorizontalAlignment="Left" BorderThickness="4px" Background="Azure" Height="29" Margin="179,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <Label x:Name="lblPincode" Content="City"  FontSize="20" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lblCustomerid" Content="Showroom Name" FontSize="20"  HorizontalAlignment="Left" Margin="-4,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="txtShowroomName" BorderThickness="4px"  HorizontalAlignment="Left" Background="Azure" Height="37" Margin="179,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" TextDecorations="{x:Null}"/>
+        <Button x:Name="btnCreate" Background="AntiqueWhite" FontSize="20"  Content="CREATE" HorizontalAlignment="Left" Margin="48,356,0,0" VerticalAlignment="Top" Width="121" Click="BtnCreate_Click" Height="48" FontWeight="Bold"/>
+        <Button x:Name="btnModify" Background="AntiqueWhite" FontSize="20" Content="MODIFY" HorizontalAlignment="Left" Margin="206,356,0,0" VerticalAlignment="Top" Width="133" Height="48" Click="BtnModify_Click" FontWeight="Bold"/>
+        <Button x:Name="btnRemove" Background="AntiqueWhite" FontSize="20"  Content="Main Menu" HorizontalAlignment="Left" Margin="366,356,0,0" Click="BtnRemove_Click" VerticalAlignment="Top" Width="145" Height="48"  FontWeight="Bold" />
+        <Button x:Name="btnViewAll" Background="AntiqueWhite" FontSize="20" Content="VIEW ALL" HorizontalAlignment="Left" Margin="546,356,0,0" VerticalAlignment="Top" Width="137" Height="48" Click="BtnViewAll_Click" FontWeight="Bold"/>
+        <Button x:Name="btnSearch" Background="AntiqueWhite" FontSize="20"  Content="SEARCH" HorizontalAlignment="Left" Margin="599,10,0,0" VerticalAlignment="Top" Width="132" Height="45"  FontWeight="Bold" Click="BtnSearch_Click"/>
+        <TextBox x:Name="txtSearch" Background="Azure" BorderThickness="4px" HorizontalAlignment="Left" Height="45" Margin="432,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
+        <DataGrid x:Name="dgDetails" BorderThickness="4px" HorizontalAlignment="Left" Height="291" Margin="382,60,0,0" VerticalAlignment="Top" Width="400" SelectionChanged="DgDetails_SelectionChanged" Background="White" BorderBrush="#FF228BF1" AlternatingRowBackground="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"/>
+        <Label x:Name="lblCMS"  FontSize="20" FontWeight="Bold" Content="Showroom Details" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.369,0.273" Height="37" Width="316">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.687"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="lblPincode_Copy" Content="State"  FontSize="20" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lblPincode_Copy1" Content="Pincode"  FontSize="20" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="txtPincode" HorizontalAlignment="Left" BorderThickness="4px" Height="33" Margin="179,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="cmb_State" HorizontalAlignment="Left" SelectionChanged="Cmb_State_SelectionChanged" BorderThickness="4px" Height="33" Margin="179,246,0,0"  VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="cmb_city" HorizontalAlignment="Left" BorderThickness="4px" Height="33" Margin="179,283,0,0"  VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="cmbDealerName"  BorderThickness="4px" Background="Azure" HorizontalAlignment="Left" Height="33" Margin="179,96,0,0"  VerticalAlignment="Top" Width="160"/>
+        <Label x:Name="lblAge_Copy" Content="Contact No" FontSize="20"  HorizontalAlignment="Left" Margin="311,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.289,0.32" FontWeight="Bold"/>
+
+        <TextBlock x:Name="tbl_adminName" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" VerticalAlignment="Top" Width="3" Margin="93,377,0,0" FontSize="0.1" FontFamily="Segoe Print"  />
+
+
+    </Grid>
+</Window>

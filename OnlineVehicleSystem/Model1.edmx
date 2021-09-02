@@ -1,0 +1,653 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OVSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CityMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateID" Type="int" />
+        </EntityType>
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="text" />
+          <Property Name="Gender" Type="text" />
+          <Property Name="ContactNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Email" Type="text" />
+          <Property Name="Address" Type="text" />
+          <Property Name="City" Type="text" />
+          <Property Name="State" Type="text" />
+          <Property Name="Pincode" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fk_CustomerID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerID" />
+          </Key>
+          <Property Name="DealerID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DealerName" Type="text" />
+          <Property Name="CompanyName" Type="text" />
+          <Property Name="Address" Type="text" />
+          <Property Name="ContactNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="City" Type="text" />
+          <Property Name="State" Type="text" />
+          <Property Name="Pincode" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SalesID" />
+          </Key>
+          <Property Name="SalesID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CustomerID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ShowroomID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="DeliveryDate" Type="date" />
+          <Property Name="Remarks" Type="text" />
+        </EntityType>
+        <EntityType Name="Showroom">
+          <Key>
+            <PropertyRef Name="ShowroomID" />
+          </Key>
+          <Property Name="ShowroomID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="text" />
+          <Property Name="DealerID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OwnerName" Type="text" />
+          <Property Name="ContactNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Address" Type="text" />
+          <Property Name="City" Type="text" />
+          <Property Name="State" Type="text" />
+          <Property Name="Pincode" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleName" Type="text" />
+          <Property Name="VehicleModel" Type="text" />
+          <Property Name="DealerID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalStock" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Rating" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CityMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CityMaster">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerID">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerID_Showroom">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Showroom" Type="Self.Showroom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="Showroom">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShowroomID">
+          <End Role="Showroom" Type="Self.Showroom" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Showroom">
+              <PropertyRef Name="ShowroomID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ShowroomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="0..1" />
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleID">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="stpGetAllCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stpGetAllDealer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="OVSModelStoreContainer">
+          <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dealer" EntityType="Self.Dealer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Showroom" EntityType="Self.Showroom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMaster" />
+            <End Role="CityMaster" EntitySet="CityMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerID" Association="Self.FK_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerID" Association="Self.FK_DealerID">
+            <End Role="Dealer" EntitySet="Dealer" />
+            <End Role="Vehicle" EntitySet="Vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerID_Showroom" Association="Self.FK_DealerID_Showroom">
+            <End Role="Dealer" EntitySet="Dealer" />
+            <End Role="Showroom" EntitySet="Showroom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShowroomID" Association="Self.FK_ShowroomID">
+            <End Role="Showroom" EntitySet="Showroom" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMaster" />
+            <End Role="StateMaster" EntitySet="StateMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleID" Association="Self.FK_VehicleID">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OVSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CityMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateID" Type="Int32" />
+          <NavigationProperty Name="StateMaster" Relationship="Self.FK_CityMaster_StateMaster" FromRole="CityMaster" ToRole="StateMaster" />
+        </EntityType>
+        <EntityType Name="CountryMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StateMasters" Relationship="Self.FK_StateMaster_CountryMaster" FromRole="CountryMaster" ToRole="StateMaster" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_CustomerID" FromRole="Customer" ToRole="Sales" />
+          <Property Name="Fk_CustomerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerID" />
+          </Key>
+          <Property Name="DealerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DealerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK_DealerID" FromRole="Dealer" ToRole="Vehicle" />
+          <NavigationProperty Name="Showrooms" Relationship="Self.FK_DealerID_Showroom" FromRole="Dealer" ToRole="Showroom" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="SalesID" />
+          </Key>
+          <Property Name="SalesID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CustomerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ShowroomID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerID" FromRole="Sales" ToRole="Customer" />
+          <NavigationProperty Name="Showroom" Relationship="Self.FK_ShowroomID" FromRole="Sales" ToRole="Showroom" />
+          <NavigationProperty Name="Vehicle" Relationship="Self.FK_VehicleID" FromRole="Sales" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="Showroom">
+          <Key>
+            <PropertyRef Name="ShowroomID" />
+          </Key>
+          <Property Name="ShowroomID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DealerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Dealer" Relationship="Self.FK_DealerID_Showroom" FromRole="Showroom" ToRole="Dealer" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_ShowroomID" FromRole="Showroom" ToRole="Sales" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StateMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" />
+          <NavigationProperty Name="CityMasters" Relationship="Self.FK_CityMaster_StateMaster" FromRole="StateMaster" ToRole="CityMaster" />
+          <NavigationProperty Name="CountryMaster" Relationship="Self.FK_StateMaster_CountryMaster" FromRole="StateMaster" ToRole="CountryMaster" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleID" />
+          </Key>
+          <Property Name="VehicleID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DealerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalStock" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Dealer" Relationship="Self.FK_DealerID" FromRole="Vehicle" ToRole="Dealer" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_VehicleID" FromRole="Vehicle" ToRole="Sales" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CityMaster_StateMaster">
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="0..1" />
+          <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CityMaster">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StateMaster_CountryMaster">
+          <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="0..1" />
+          <End Role="StateMaster" Type="Self.StateMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CountryMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StateMaster">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerID">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerID_Showroom">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Showroom" Type="Self.Showroom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerID" />
+            </Principal>
+            <Dependent Role="Showroom">
+              <PropertyRef Name="DealerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShowroomID">
+          <End Role="Showroom" Type="Self.Showroom" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Showroom">
+              <PropertyRef Name="ShowroomID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ShowroomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleID">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OVSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CityMasters" EntityType="Self.CityMaster" />
+          <EntitySet Name="CountryMasters" EntityType="Self.CountryMaster" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Dealers" EntityType="Self.Dealer" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Showrooms" EntityType="Self.Showroom" />
+          <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+          <AssociationSet Name="FK_CityMaster_StateMaster" Association="Self.FK_CityMaster_StateMaster">
+            <End Role="StateMaster" EntitySet="StateMasters" />
+            <End Role="CityMaster" EntitySet="CityMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StateMaster_CountryMaster" Association="Self.FK_StateMaster_CountryMaster">
+            <End Role="CountryMaster" EntitySet="CountryMasters" />
+            <End Role="StateMaster" EntitySet="StateMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerID" Association="Self.FK_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerID" Association="Self.FK_DealerID">
+            <End Role="Dealer" EntitySet="Dealers" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerID_Showroom" Association="Self.FK_DealerID_Showroom">
+            <End Role="Dealer" EntitySet="Dealers" />
+            <End Role="Showroom" EntitySet="Showrooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShowroomID" Association="Self.FK_ShowroomID">
+            <End Role="Showroom" EntitySet="Showrooms" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleID" Association="Self.FK_VehicleID">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <FunctionImport Name="stpGetAllCustomer" ReturnType="Collection(OVSModel.stpGetAllCustomer_Result)" />
+          <FunctionImport Name="stpGetAllDealer" ReturnType="Collection(OVSModel.stpGetAllDealer_Result)" />
+        </EntityContainer>
+        <ComplexType Name="stpGetAllCustomer_Result">
+          <Property Type="Decimal" Name="CustomerID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="ContactNo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="Pincode" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Fk_CustomerID" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="stpGetAllDealer_Result">
+          <Property Type="Decimal" Name="DealerID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="DealerName" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="ContactNo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="Pincode" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OVSModelStoreContainer" CdmEntityContainer="OVSEntities">
+          <EntitySetMapping Name="CityMasters">
+            <EntityTypeMapping TypeName="OVSModel.CityMaster">
+              <MappingFragment StoreEntitySet="CityMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountryMasters">
+            <EntityTypeMapping TypeName="OVSModel.CountryMaster">
+              <MappingFragment StoreEntitySet="CountryMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OVSModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Fk_CustomerID" ColumnName="Fk_CustomerID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="OVSModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="OVSModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ShowroomID" ColumnName="ShowroomID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Showrooms">
+            <EntityTypeMapping TypeName="OVSModel.Showroom">
+              <MappingFragment StoreEntitySet="Showroom">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ShowroomID" ColumnName="ShowroomID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StateMasters">
+            <EntityTypeMapping TypeName="OVSModel.StateMaster">
+              <MappingFragment StoreEntitySet="StateMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="OVSModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="VehicleName" ColumnName="VehicleName" />
+                <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="TotalStock" ColumnName="TotalStock" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="stpGetAllCustomer" FunctionName="OVSModel.Store.stpGetAllCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OVSModel.stpGetAllCustomer_Result">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Fk_CustomerID" ColumnName="Fk_CustomerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stpGetAllDealer" FunctionName="OVSModel.Store.stpGetAllDealer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OVSModel.stpGetAllDealer_Result">
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

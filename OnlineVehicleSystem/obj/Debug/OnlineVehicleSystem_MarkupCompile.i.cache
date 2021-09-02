@@ -1,0 +1,20 @@
+﻿OnlineVehicleSystem
+
+
+winexe
+C#
+.cs
+C:\Users\Aditya Kumar\Documents\study material\Project\OnlineVehicleSystemWPF\OnlineVehicleSystem\obj\Debug\
+OnlineVehicleSystem
+none
+false
+DEBUG;TRACE
+C:\Users\Aditya Kumar\Documents\study material\Project\OnlineVehicleSystemWPF\OnlineVehicleSystem\App.xaml
+141985907969
+21750853300
+351364912341
+18120893145
+AddDealer.xaml;AdminLoginControl.xaml;Bill.xaml;BookAVehicle.xaml;CustomerLoginControl.xaml;CustomerLoginSignup.xaml;CustomerRegistration.xaml;DealerGrid.xaml;MainWindow.xaml;PurchaseDetails.xaml;ShowroomControl.xaml;VehicleControl.xaml;ViewSale.xaml;WelcomePage.xaml;
+
+False
+

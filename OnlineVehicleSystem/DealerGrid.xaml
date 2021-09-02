@@ -1,0 +1,21 @@
+﻿<Window x:Class="OnlineVehicleSystem.DealerGrid"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineVehicleSystem"
+        mc:Ignorable="d"
+        Title="DealerGrid" Loaded="Window_Loaded" Height="450" Width="800">
+    <Grid RenderTransformOrigin="0.532,0.488" Background="Aquamarine">
+        <!--<TextBox x:Name="txtSearch" Background="Azure" BorderThickness="4px" HorizontalAlignment="Left" Height="45" Margin="28,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>-->
+        <!--<Button x:Name="btnSearch" Background="AntiqueWhite" FontSize="20" Click="BtnSearch_Click" Content="SEARCH" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top" Width="132" Height="45"  FontWeight="Bold"/>-->
+        <Button x:Name="btnViewAll" Background="AntiqueWhite" FontSize="20" Click="BtnViewAll_Click" Content="VIEW ALL" HorizontalAlignment="Left" Margin="546,356,0,0" VerticalAlignment="Top" Width="137" Height="48"  FontWeight="Bold" />
+        <Button x:Name="btnMainMenu" Background="AntiqueWhite" FontSize="20"  Content="Main Menu" HorizontalAlignment="Left" Margin="48,356,0,0" VerticalAlignment="Top" Width="121"  Height="48" FontWeight="Bold" Click="BtnMainMenu_Click"/>
+        <Button x:Name="GoBack" Background="AntiqueWhite" FontSize="20" Content="GoBack" HorizontalAlignment="Left" Margin="206,356,0,0" VerticalAlignment="Top" Width="133" Height="48"  FontWeight="Bold" Click="GoBack_Click"/>
+
+
+        <DataGrid x:Name="dgDetails" BorderThickness="4px" HorizontalAlignment="Left" SelectionChanged="DgDetails_SelectionChanged" Height="291" Margin="10,60,0,0" VerticalAlignment="Top" Width="772"  Background="White" BorderBrush="#FF228BF1" AlternatingRowBackground="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"/>
+
+
+    </Grid>
+</Window>
