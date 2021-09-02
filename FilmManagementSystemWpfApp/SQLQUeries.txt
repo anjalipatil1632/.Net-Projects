@@ -1,0 +1,1048 @@
+use master
+
+--------------------------------------------------------------FILM TABLE-------------------------------------------------------------
+drop table tbl_Film
+select * from tbl_Film
+drop table tbl_Film
+
+create table tbl_Film 
+(
+	FilmID int primary key identity(1001,1),
+	Title varchar(50) unique NOT NULL,
+	ReleaseYear int not null,
+	RentalDuration int not null,
+	RentalRate float not null,
+	[Length] float not null,
+	ReplacementCost float not null,
+	Rating int not null,
+	[Description] varchar(800) not null,
+	CategoryID int not null foreign key references tbl_Category(CategoryID),
+	LanguageID int not null foreign key references tbl_Language(LanguageID) ,
+	ActorID int not null foreign key references tbl_Actor(ActorID),
+	
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'MS Dhoni: The Untold Story ',
+	 2016,
+	 1,
+	 100,
+	 1,
+	 500,
+	 5,
+	 'M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams.',
+	 204,
+	 102,
+	 301
+
+)
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'K.G.F: Chapter 1 ',
+	 2018,
+	 3,
+	 400,
+	 3,
+	 450,
+	 5,
+	 'Rocky, a young man, seeks power and wealth in order to fulfil a promise to his dying mother. His quest takes him to Mumbai, where he gets involved with the notorious gold mafia.',
+	 205,
+	 102,
+	 302
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Gangs of Wasseypur Part 1',
+	 2012,
+	 3,
+	 400,
+	 3,
+	 450,
+	 5,
+	 'A gangster (Manoj Bajpayee) clashes with the ruthless, coal-mining kingpin (Tigmanshu Dhulia) who killed his father (Jaideep Ahlawat).',
+	 202,
+	 102,
+	 303
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Gangs of Wasseypur - Part 2',
+	 2012,
+	 3,
+	 100,
+	 3,
+	 450,
+	 5,
+	 'Faizal Khan waits as he watches his nemesis Ramadhir Singh climb the ladders of success. He plays his cards carefully and eventually creates an empire, forcing Ramadhir Singh to plead for peace.',
+	 202,
+	 102,
+	 304
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Super 30 ',
+	 2019,
+	 3,
+	 300,
+	 3,
+	 450,
+	 4,
+	 'Anand Kumar, a mathematician from Patna, India, works his way through challenges towards success before running the Super 30 programme for IIT aspirants in Patna.',
+	 204,
+	 102,
+	 305
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Lagaan ',
+	 2001,
+	 3,
+	 500,
+	 3,
+	 1500,
+	 5,
+	 'During the British Raj, a farmer named Bhuvan accepts the challenge of Captain Andrew Russell to beat his team in a game of cricket and enable his village to not pay taxes for the next three years.',
+	 204,
+	 102,
+	 306
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Hera Pheri',
+	 2000,
+	 3,
+	 500,
+	 3,
+	 1500,
+	 5,
+	 'Two tenants and a landlord, in desperate need of money, chance upon a ransom call via a cross connection. They hatch a plan to claim the ransom for themselves.',
+	 202,
+	 102,
+	 307
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Hum Aapke Hain Koun',
+	 1994,
+	 3,
+	 300,
+	 3,
+	 900,
+	 3,
+	 'During his brother Rajeshs wedding, Prem meets his sister-in-law Nisha and the two soon fall in love. However, their relationship is threatened when Rajeshs wife unexpectedly passes away.',
+	 204,
+	 102,
+	 308
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Devdas',
+	 2002,
+	 3,
+	 100,
+	 3,
+	 300,
+	 3,
+	 'After his wealthy family prohibits him from marrying the woman he is in love with, Devdas life spirals downward as he takes up alcohol and a life of vice to alleviate the pain.',
+	 204,
+	 104,
+	 312
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Dhamaal',
+	 2007,
+	 3,
+	 400,
+	 3,
+	 1200,
+	 3,
+	 'Roy, Manav, Aditya and Boman, four lazy friends, embark on a race to find a hidden treasure in Goa, unaware that their plans will soon be foiled by Inspector Kabir.',
+	 202,
+	 102,
+	 314
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Hungama',
+	 2003,
+	 3,
+	 100,
+	 3,
+	 300,
+	 3,
+	 'A millionaire businessman living in a village decides to move to the city with his wife. They soon get into a case of mistaken identity that results in comical situations.',
+	 202,
+	 102,
+	 313
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Phir Hera Pheri',
+	 2006,
+	 3,
+	 500,
+	 3,
+	 1500,
+	 4,
+	 'The lives of Raju, Shyam and Babu Rao change completely when they get cheated by a con artist. They must discover a way to repay the loan they took from a dreaded gangster with a speech impairment.',
+	 202,
+	 102,
+	 307
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Golmaal: Fun Unlimmited',
+	 2006,
+	 3,
+	 450,
+	 3,
+	 330,
+	 4,
+	 'A man falls in love with a beautiful woman, Purva, but he realises that his room-mate also loves her. Things get stranger when two more men fall in love with Purva and start competing with them.',
+	 202,
+	 102,
+	 309
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Chup Chup Ke',
+	 2006,
+	 3,
+	 450,
+	 3,
+	 600,
+	 3,
+	 'A fisherman saves Jeetu from committing suicide, only to sell him to a moneylender. Jeetu is then forced to pose as a man with hearing and speech impairment, resulting in hilarious consequences.',
+	 204,
+	 102,
+	 309
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Delhi Belly',
+	 2011,
+	 3,
+	 100,
+	 3,
+	 300,
+	 3,
+	 'Tashi, Nitin and Arup, three strugglers who are also roommates, unknowingly become the target of a powerful gangster when they misplace his expensive diamonds.',
+	 203,
+	 101,
+	 313
+
+)
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'PK',
+	 2014,
+	 3,
+	 400,
+	 3,
+	 550,
+	 4,
+	 'An innocent alien lands on Earth but loses his communication device. He meets Jaggu, a heartbroken reporter, and tries to find his device. With time, he raises many thought-provoking questions.',
+	 202,
+	 102,
+	 306
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'De Dana Dan',
+	 2009,
+	 3,
+	 100,
+	 3,
+	 100,
+	 2,
+	 'Two penniless friends are in desperate need of money in order to marry their respective girlfriends. In their attempts to make quick money, they kidnap a rich womans pet and demand a hefty ransom.',
+	 202,
+	 102,
+	 307
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Chennai Express',
+	 2013,
+	 3,
+	 200,
+	 3,
+	 350,
+	 3,
+	 'Rahul, a young man, sets out to immerse his late grandfathers ashes at Rameshwaram. However, when he helps Meena, a runaway bride, board a train, he has to face the ire of her criminal family.',
+	 205,
+	 106,
+	 312
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Bhool Bhulaiyaa ',
+	 2007,
+	 2.5,
+	 500,
+	 3,
+	 550,
+	 5,
+	 'An NRI and his wife decide to stay in his ancestral home, paying no heed to the warnings about ghosts. Soon, inexplicable occurrences cause him to call a psychiatrist to help solve the mystery.',
+	 201,
+	 104,
+	 307
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Jolly LLB',
+	 2013,
+	 3,
+	 400,
+	 3,
+	 450,
+	 5,
+	 'Jolly, a struggling lawyer seeking success, comes upon a hit-and-run case and decides to fight for the victims. However, the defendant hires a proficient lawyer, Rajpal, to go against him.',
+	 202,
+	 102,
+	 313
+
+)
+
+insert into tbl_Film
+(
+	Title,
+	ReleaseYear,
+	RentalDuration,
+	RentalRate,
+	[Length],
+	ReplacementCost,
+	Rating,
+	[Description],
+	CategoryID,
+	LanguageID,
+	ActorID
+)
+values
+(
+	'Munna Bhai MBBS',
+	 2003,
+	 3,
+	 200,
+	 3,
+	 250,
+	 3,
+	 'Munna is a goon who sets out to fulfil his fathers dream of becoming a doctor. With some help from his ally, Circuit, he enrols himself in a medical college and drives Dr Asthana up the wall.',
+	 202,
+	 102,
+	 315
+
+)
+select * from tbl_Film
+
+select Title,ReleaseYear,Rating from tbl_Film where Title='K.G.F: Chapter 1' 
+--delete from tbl_Film where FilmID=1006
+
+
+
+------------------------------------------------------------------RELEASE YEAR TABLE---------------------------------------------------------
+
+
+drop table tbl_ReleaseYear
+create table tbl_ReleaseYear
+(
+	SLNum int identity(1,1),
+	[Year] int
+)
+select * from tbl_ReleaseYear
+insert into tbl_ReleaseYear
+([Year]) values (2000)
+
+insert into tbl_ReleaseYear
+([Year]) values (2001)
+
+insert into tbl_ReleaseYear
+([Year]) values (2002)
+
+insert into tbl_ReleaseYear
+([Year]) values (2003)
+
+insert into tbl_ReleaseYear
+([Year]) values (2004)
+
+insert into tbl_ReleaseYear
+([Year]) values (2005)
+
+insert into tbl_ReleaseYear
+([Year]) values (2006)
+
+insert into tbl_ReleaseYear
+([Year]) values (2007)
+
+insert into tbl_ReleaseYear
+([Year]) values (2008)
+
+insert into tbl_ReleaseYear
+([Year]) values (2009)
+
+insert into tbl_ReleaseYear
+([Year]) values (2010)
+
+insert into tbl_ReleaseYear
+([Year]) values (2011)
+
+insert into tbl_ReleaseYear
+([Year]) values (2012)
+
+insert into tbl_ReleaseYear
+([Year]) values (2013)
+
+insert into tbl_ReleaseYear
+([Year]) values (2014)
+
+insert into tbl_ReleaseYear
+([Year]) values (2015)
+
+insert into tbl_ReleaseYear
+([Year]) values (2016)
+
+insert into tbl_ReleaseYear
+([Year]) values (2017)
+
+insert into tbl_ReleaseYear
+([Year]) values (2018)
+
+insert into tbl_ReleaseYear
+([Year]) values (2019)
+
+insert into tbl_ReleaseYear
+([Year]) values (2020)
+
+insert into tbl_ReleaseYear
+([Year]) values (2021)
+
+
+---------------------------------------------------------------RENTAL RATE TABLE-------------------------------------------------------------------
+
+
+create table tbl_RentalRate
+(
+	SlNum int identity(1,1),
+	[Rates] int
+)
+
+
+drop table tbl_RentalRate
+insert into tbl_RentalRate
+([Rates]) values (100)
+insert into tbl_RentalRate
+([Rates]) values (200)
+insert into tbl_RentalRate
+([Rates]) values (300)
+insert into tbl_RentalRate
+([Rates]) values (400)
+insert into tbl_RentalRate
+([Rates]) values (500)
+
+
+-----------------------------------------------------------FILM LENGTH TABLE-------------------------------------------------------------------------
+
+--drop table tbl_Length
+create table tbl_Length
+(
+	SlNum int identity(1,1),
+	[Length] float
+)
+
+insert into tbl_Length
+([Length]) values (1)
+insert into tbl_Length
+([Length]) values (2)
+insert into tbl_Length
+([Length]) values (2.5)
+insert into tbl_Length
+([Length]) values (3)
+insert into tbl_Length
+([Length]) values (3.5)
+
+select * from tbl_Length
+
+
+-------------------------------------------------------LANGUAGE TABLE--------------------------------------------------------------------------
+drop table tbl_language
+
+create table tbl_language
+(
+	LanguageID int primary key identity(101,1),
+	[Language] varchar(400),
+	--FlimID int,
+	--CONSTRAINT fk_FlimIDLanguage Foreign key (FlimID)
+	--REFERENCES  tbl_Film(FilmID)
+
+)
+
+insert into tbl_language
+([Language]) values ('English')
+
+insert into tbl_language
+([Language]) values ('Hindi')
+
+insert into tbl_language
+([Language]) values ('Urdu')
+
+insert into tbl_language
+([Language]) values ('Bengali')
+
+insert into tbl_language
+([Language]) values ('Punjabi')
+
+insert into tbl_language
+([Language]) values ('Tamil')
+
+select * from tbl_language
+
+
+-------------------------------------------------------CATEGORY TABLE------------------------------------------------------------------------------
+drop table tbl_category
+--select * from tbl_category
+create table tbl_category
+(
+		CategoryID int primary key identity(201,1),
+		Category varchar(100) unique,
+		--FlimID int
+		--CONSTRAINT fk_FlimIDCategory Foreign key (FlimID)
+	    --REFERENCES  tbl_Film(FilmID)
+)
+
+insert into tbl_category
+(Category) values ('Horror')
+
+insert into tbl_category
+(Category) values ('Comedy')
+
+insert into tbl_category
+(Category) values ('Thriller')
+
+insert into tbl_category
+(Category) values ('Romance')
+
+insert into tbl_category
+(Category) values ('Action')
+
+insert into tbl_category
+(Category) values ('Drama')
+
+insert into tbl_category
+(Category) values ('Sports')
+
+select * from tbl_category
+
+----------------------------------------------------------ACTOR TABLE-------------------------------------------------------------------------
+drop table tbl_actor
+select * from tbl_Film
+create table tbl_actor
+(
+		ActorID int primary key identity(301,1),
+		ActorName varchar(100) unique,
+		--FlimID int
+		--CONSTRAINT fk_FlimIDCategory Foreign key (FlimID)
+	    --REFERENCES  tbl_Film(FilmID)
+)
+
+insert into tbl_actor
+(ActorName) values ('Sushant Singh Rajput')
+
+insert into tbl_actor
+(ActorName) values ('Yash')
+
+insert into tbl_actor
+(ActorName) values ('Manoj Bajpayee')
+
+insert into tbl_actor
+(ActorName) values ('Nawazuddin Siddiqui')
+
+insert into tbl_actor
+(ActorName) values ('Hritik Roshan')
+
+insert into tbl_actor
+(ActorName) values ('Aamir Khan')
+
+insert into tbl_actor
+(ActorName) values ('Akshay Kumar')
+
+insert into tbl_actor
+(ActorName) values ('Sunil Shetty')
+
+insert into tbl_actor
+(ActorName) values ('Paresh Rawal')
+
+insert into tbl_actor
+(ActorName) values ('Salman Khan')
+
+insert into tbl_actor
+(ActorName) values ('Madhuri Dixit')
+
+insert into tbl_actor
+(ActorName) values ('Shahrukh Khan')
+
+insert into tbl_actor
+(ActorName) values ('Arshad Warsi')
+
+insert into tbl_actor
+(ActorName) values ('Javed Jaffery')
+
+insert into tbl_actor
+(ActorName) values ('Sanjay Dutt')
+
+
+select * from tbl_actor
+select * from tbl_category
+select * from tbl_language
+select * from tbl_Film
+select filmid,title from tbl_Film as a,tbl_category as b where a.FilmID=b.CategoryID  
+update tbl_Film set Title=
+
+
+
+create procedure getFilm
+
+as
+
+select Title,ReleaseYear,Rating ,[Description] from tbl_film
+
+exec getFilm
+
+
+select * from tbl_Film
+
+CREATE PROCEDURE InsertFilm 
+	@Title varchar(50) ,
+	@ReleaseYear int ,
+	@RentalDuration int ,
+	@RentalRate float ,
+	@Length float,
+	@ReplacementCost float,
+	@Rating int ,
+	@Description varchar(800),
+	@CategoryID int,
+	@LanguageID int,
+	@ActorID int
+	
+AS
+
+INSERT INTO tbl_Film
+           (
+           [Title]
+           ,[ReleaseYear]
+           ,[RentalDuration]
+           ,[RentalRate]
+           ,[Length]
+		   ,[ReplacementCost]
+		   ,[Rating]
+		   ,[Description]
+		   ,[CategoryID]
+		   ,[LanguageID]
+		   ,[ActorID])
+     VALUES
+           (@Title,
+	@ReleaseYear,
+	@RentalDuration,
+	@RentalRate,
+	@Length,
+	@ReplacementCost,
+	@Rating,
+	@Description,
+	@CategoryID,
+	@LanguageID,
+	@ActorID)
+GO
+
+create proc UpdateFilm 
+    
+	@FilmTitle varchar(100),
+	@ReleaseYear int ,
+	@RentalDuration int ,
+	@RentalRate float ,
+	@Length float,
+	@ReplacementCost float,
+	@Rating int ,
+	@Description varchar(800),
+	@CategoryID int,
+	@LanguageID int,
+	@ActorID int
+
+	as
+	begin
+	update tbl_Film set 
+	 ReleaseYear=@ReleaseYear,
+	  RentalDuration=@RentalDuration,
+	    RentalRate=@RentalRate,
+	     [Length]=@Length,
+	      ReplacementCost=@ReplacementCost,
+	       rating=@Rating,
+	         [Description]=@Description,
+	          CategoryID=@CategoryID,
+	             LanguageID=@LanguageID,
+	               ActorID=@ActorID
+
+				   where
+				   Title= @FilmTitle
+
+				   End
+
+				   select * from tbl_category
+				   drop proc SearchRating
+				   create proc SearchRating 
+				
+				   @Rating int
+				  
+
+
+				   as
+				   begin
+				   select Title,ReleaseYear,Rating,[Description] from tbl_Film where Rating=@Rating
+				   end
+				   drop proc SearchTitle
+				    create proc SearchTitle @Title Varchar(100)
+				     
+
+
+				   as
+				   begin
+				   select Title,ReleaseYear,Rating,[Description] from tbl_Film where Title=@Title
+				   end
+
+
+				   
+				   create proc SearchReleaseYear @Title Varchar(100),
+				   @ReleaseYear int,
+				   @Rating int,
+				   @Description varchar(800)
+
+
+				   as
+				   begin
+				   select @Title=Title,@ReleaseYear=ReleaseYear,@Rating=Rating,@Description=[Description] from tbl_Film where ReleaseYear=@ReleaseYear
+				   end
+
+				   	
+				 
+        
+		  create proc DeleteFilms
+		  (@FilmTitle varchar(60))
+		  as
+		  begin
+		  delete from tbl_film where Title=@FilmTitle
+		  End

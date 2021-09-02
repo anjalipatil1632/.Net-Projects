@@ -1,0 +1,11 @@
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagemenBAL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagemenBAL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagementBEL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagementDAL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagementBEL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\bin\Debug\FilmManagementDAL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\obj\Debug\FilmManagemenBAL.csprojAssemblyReference.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\obj\Debug\FilmManagemenBAL.csproj.CoreCompileInputs.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\obj\Debug\FilmManagemenBAL.csproj.CopyComplete
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\obj\Debug\FilmManagemenBAL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagemenBAL\obj\Debug\FilmManagemenBAL.pdb

@@ -1,0 +1,77 @@
+﻿<Window x:Class="FilmManagementWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmManagementWpf"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="401" Stroke="Black" VerticalAlignment="Top" Width="772" RenderTransformOrigin="0.441,0.555" Margin="10,8,0,0"/>
+        <Label Name="lbl_FilmManagementSystem" Content="Film Management System" HorizontalAlignment="Left" FontWeight="Bold" VerticalAlignment="Top" Margin="280,2,0,0" FontSize="20"/>
+        <Label Name="lbl_FilmTitle" Content="Film Title                :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,57,0,0"/>
+        <Label Name="lbl_ReleaseYear" Content="Release Year           :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,89,0,0"/>
+        <Label Name="lbl_RentalDuration" Content="Rental Duration      :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,118,0,0"/>
+        <Label Name="lbl_FilmRate" Content="Rental Rate             :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,169,0,0"/>
+        <Label Name="lbl_Length" Content="Length (Hr.)            :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,200,0,0"/>
+        <Label Name="lbl_ReplacementCost" Content="Replacement Cost  :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,232,0,0"/>
+        <Label Name="lbl_Rating" Content="Rating                     :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,258,0,0"/>
+        <Label Name="lbl_FilmDescription" Content="Film Description     :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,286,0,0"/>
+        <Label Name="lbl_Results" Content="Results  :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="361,49,0,0"/>
+        <Label Name="lbl_StartDuration" Content="Start Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,116,0,0"/>
+        <Label Name="lbl_EndDuration" Content="End Date"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,115,0,0"/>
+        <Label Name="lbl_SearchOptions" Content="Search/Flim Report Options :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="363,289,0,0"/>
+        <Label Name="lbl_SpecialFeatures" Content="Category                 :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,316,0,0"/>
+        <Label Name="lbl_Language" Content="Language                 :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,344,0,0"/>
+        <Label Name="lbl_Actor" Content="Actor                        :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,368,0,0"/>
+        <Label Name="lbl_RatingInput" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="293,258,0,0"/>
+
+        <TextBox Name="txt_FilmTitle" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" Margin="167,59,0,0"/>
+        <TextBox Name="txt_FilmDescription" HorizontalAlignment="Left" Height="21" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Margin="167,289,0,0"/>
+        <TextBox Name="txt_ReplacementCost" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" IsReadOnly="True" VerticalAlignment="Top" Width="63" Margin="167,233,0,0"/>
+        <TextBox Name="txt_Search" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Margin="357,341,0,0"/>
+
+
+        <StackPanel Margin="146,263,0,0" HorizontalAlignment="Left" Width="601" Height="28" VerticalAlignment="Top" >
+
+            <Slider Name="slider_rating" Maximum="5" TickFrequency="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged" Margin="0,0,468.667,0" HorizontalAlignment="Right" Width="109" />
+        </StackPanel>
+
+
+
+
+        <DatePicker Name="dp_RentStartDate" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="167,139,0,0" Width="58"/>
+        <DatePicker Name="dp_RentEndDate" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="252,139,0,0" Width="54"/>
+
+
+        <ComboBox Name="cmb_RentalRate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="167,171,0,0"/>
+        <ComboBox Name="cmb_ReleaseYear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="167,90,0,0"/>
+        <ComboBox Name="cmb_Length" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="167,203,0,0"/>
+        <ComboBox Name="cmb_Category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="167,319,0,0"  ItemsSource="{Binding}" SelectedValuePath="Category" DisplayMemberPath="CategoryID"/>
+        <ComboBox Name="cmb_Language" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="167,349,0,0" ItemsSource="{Binding}" SelectedValuePath="Language" DisplayMemberPath="LanguageID" />
+        <ComboBox Name="cmb_Actor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="167,377,0,0" ItemsSource="{Binding}" SelectedValuePath="ActorName" DisplayMemberPath="ActorID"/>
+
+        <Button Name="btn_Add" Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Margin="357,378,0,0" Click="Btn_Add_Click" />
+        <Button Name="btn_Modify" Content="MODIFY" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="617,378,0,0" Click="Btn_Modify_Click"/>
+        <Button Name="btn_ClearAll" Content="CLEAR ALL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="443,378,0,0" Click="Btn_ClearAll_Click" />
+        <Button Name="btn_Search" Content="SEARCH" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="529,341,0,0" Click="Btn_Search_Click" />
+        <Button Name="btn_DeleteRecord" Content="DELETE " HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="699,341,0,0" Click="Btn_DeleteRecord_Click"/>
+        <Button Name="btn_CalculateCost" Content="CALCULATE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="241,234,0,0" Click="Btn_CalculateCost_Click" />
+        <Button Name="btn_ShowAll" Content="SHOW ALL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="529,378,0,0" Click="Btn_ShowAll_Click" />
+        <Button Name="btn_ViewID" Content="VIEW" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="617,341,0,0" Click="Btn_ViewID_Click" />
+        <Button Name="btn_Submit" Content="SUBMIT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="699,378,0,0" Click="Btn_Submit_Click" />
+
+
+        <RadioButton Name="rb_SearchByName" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="370,315,0,0"/>
+        <RadioButton Name="rb_SearchByActor" Content="Actor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,315,0,0"/>
+        <RadioButton Name="rb_SearchByCategory" Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="516,315,0,0"/>
+        <RadioButton Name="rb_SearchByLanguage" Content="Language" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,315,0,0"/>
+        <RadioButton Name="rb_SearchByRating" Content="Rating" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="706,315,0,0"/>
+
+
+        <DataGrid Name="dgrd_Results" HorizontalAlignment="Left" Height="216" VerticalAlignment="Top" Width="396" Margin="365,75,0,0"/>
+
+
+
+    </Grid>
+</Window>

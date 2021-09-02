@@ -1,0 +1,11 @@
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\FilmManagementBEL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\FilmManagementBEL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\EntityFramework.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\EntityFramework.xml
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\obj\Debug\FilmManagementBEL.csprojAssemblyReference.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\obj\Debug\FilmManagementBEL.csproj.CoreCompileInputs.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\obj\Debug\FilmManagementBEL.csproj.CopyComplete
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\obj\Debug\FilmManagementBEL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementBEL\obj\Debug\FilmManagementBEL.pdb

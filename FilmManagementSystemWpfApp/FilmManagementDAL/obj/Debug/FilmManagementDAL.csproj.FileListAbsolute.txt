@@ -1,0 +1,9 @@
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\bin\Debug\FilmManagementDAL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\bin\Debug\FilmManagementDAL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\obj\Debug\FilmManagementDAL.csprojAssemblyReference.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\obj\Debug\FilmManagementDAL.csproj.CoreCompileInputs.cache
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\obj\Debug\FilmManagementDAL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\obj\Debug\FilmManagementDAL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\bin\Debug\FilmManagementBEL.dll
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\bin\Debug\FilmManagementBEL.pdb
+C:\Users\saurabh kashyap\source\repos\FilmManagementSystemWpfApp\FilmManagementDAL\obj\Debug\FilmManagementDAL.csproj.CopyComplete
