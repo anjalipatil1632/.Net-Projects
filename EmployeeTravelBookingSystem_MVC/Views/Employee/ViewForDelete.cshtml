@@ -1,0 +1,88 @@
+﻿@model IEnumerable<EmployeeTravelBookingSystem_MVC.Models.TravelRequestEmp>
+
+@{
+    ViewBag.Title = "ViewForDelete";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+
+<h4>Welcome, @Session["EmployeeId"].ToString()</h4>
+<br />
+<center>
+<h4><u><b>Your Current Traveling Status</b></u></h4>
+<hr />
+<h6 style="color:red">*Note: Before canceling raised ticket check current status of the ticket.If ticket is Confirmed you can not cancel that ticket*</h6>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentStatus)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromLocation)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.ToLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentStatus)
+            </td>
+            <td>
+                @*@Html.ActionLink("Cancel Ticket", "Delete", new { id=item})*@
+                @Html.ActionLink("Cancel Ticket", "Delete", new { id = item.RequestId }, new { onclick = "return confirm('Are you sure you want to Cancel this ticket?');", @class = "btn btn-primary btn-large" })
+            </td>
+        </tr>
+    }
+
+</table>
+</center>

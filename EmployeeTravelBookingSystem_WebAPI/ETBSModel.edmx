@@ -1,0 +1,1081 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ETBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TravelRequests">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" />
+          <Property Name="FromLocation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ToLocation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Medium" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CurrentStatus" Type="varchar" MaxLength="30" />
+          <Property Name="ManagerStatus" Type="varchar" MaxLength="10" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginId" Type="nvarchar" MaxLength="40" />
+          <Property Name="Password" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="70" />
+          <Property Name="UserTypeId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ManagerUserId" Type="int" />
+          <Property Name="Ticket_Count" Type="int" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_userTypeID_Users_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddEmployee1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="usertype" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="manageruserid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="addmanager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="addmyusers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="usertype" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="manageruserid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="addtravelagent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddTravelRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromlocation" Type="varchar" Mode="In" />
+          <Parameter Name="tolocation" Type="varchar" Mode="In" />
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+          <Parameter Name="medium" Type="varchar" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AssignManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="manageruserid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ChangeManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="manageruserid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ChangeTravelStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+          <Parameter Name="CurrentStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ChangeTravelStatus1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+          <Parameter Name="CurrentStatus" Type="varchar" Mode="In" />
+          <Parameter Name="LoginId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ConfirmedTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DeleteEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTravelAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getCount1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEmpDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTravelAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUser1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="usertypeid" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spApprovedRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spCancelTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="requestid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEmpCheckLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spexample" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+          <Parameter Name="ManagerStatus" Type="varchar" Mode="In" />
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetNewRequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="managerid" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spGetRecordsById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetTravelRequestDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spHistoryRecords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spRejectedRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUpdateApproveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+          <Parameter Name="ManagerStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateTravelAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_TravelRequests_Travelagent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="viewCancel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="loginid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ViewEmpDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ViewManagerDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ViewTravelAgentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ETBSModelStoreContainer">
+          <EntitySet Name="TravelRequests" EntityType="Self.TravelRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_userTypeID_Users_UserType" Association="Self.FK_userTypeID_Users_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ETBSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TravelRequest">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestDate" Type="DateTime" Precision="3" />
+          <Property Name="FromLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ToLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Medium" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ManagerStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="TravelRequests" ToRole="Users" />
+          <Property Name="ManagerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ManagerUserId" Type="Int32" />
+          <Property Name="Ticket_Count" Type="Int32" />
+          <NavigationProperty Name="TravelRequests" Relationship="Self.FK_userID_TravelRequests_Users" FromRole="Users" ToRole="TravelRequests" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="Users" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_userTypeID_Users_UserType" FromRole="UserType" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_userID_TravelRequests_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TravelRequests" Type="Self.TravelRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TravelRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTypeID_Users_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpTravelBookingSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TravelRequests" EntityType="Self.TravelRequest" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_userID_TravelRequests_Users" Association="Self.FK_userID_TravelRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TravelRequests" EntitySet="TravelRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTypeID_Users_UserType" Association="Self.FK_userTypeID_Users_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="AddTravelRequest">
+            <Parameter Name="requestedate" Mode="In" Type="DateTime" />
+            <Parameter Name="fromlocation" Mode="In" Type="String" />
+            <Parameter Name="tolocation" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="medium" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="currentstatus" Mode="In" Type="String" />
+            <Parameter Name="managerstatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spCancelTicket">
+          <Parameter Name="requestid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetTravelRequestDetails" ReturnType="Collection(ETBSModel.spGetTravelRequestDetails_Result)">
+          <Parameter Name="loginid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddTravelRequest1">
+            <Parameter Name="requestedate" Mode="In" Type="DateTime" />
+            <Parameter Name="fromlocation" Mode="In" Type="String" />
+            <Parameter Name="tolocation" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="medium" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddTravelRequest2">
+            <Parameter Name="fromlocation" Mode="In" Type="String" />
+            <Parameter Name="tolocation" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="medium" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddTravelRequest3">
+            <Parameter Name="fromlocation" Mode="In" Type="String" />
+            <Parameter Name="tolocation" Mode="In" Type="String" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="medium" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetTravelRequestDetails1" ReturnType="Collection(ETBSModel.spGetTravelRequestDetails1_Result)">
+          <Parameter Name="loginid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spApprovedRequest" ReturnType="Collection(ETBSModel.spApprovedRequest_Result)" />
+          <FunctionImport Name="spGetNewRequest" ReturnType="Collection(ETBSModel.spGetNewRequest_Result)">
+            <Parameter Name="managerid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetRecordsById" ReturnType="Collection(ETBSModel.spGetRecordsById_Result)">
+          <Parameter Name="RequestId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spHistoryRecords" ReturnType="Collection(ETBSModel.spHistoryRecords_Result)" />
+          <FunctionImport Name="spRejectedRequest" ReturnType="Collection(ETBSModel.spRejectedRequest_Result)" />
+          <FunctionImport Name="spGetNewRequests" ReturnType="Collection(ETBSModel.spGetNewRequests_Result)">
+          <Parameter Name="managerid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="viewCancel" ReturnType="Collection(ETBSModel.viewCancel_Result)">
+          <Parameter Name="loginid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddEmployee">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddEmployee1">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="usertype" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addmanager">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addmyusers">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="usertype" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addtravelagent">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AssignManager">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeManager">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="manageruserid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeTravelStatus">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ChangeTravelStatus1">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentStatus" Mode="In" Type="String" />
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConfirmedTicket" ReturnType="Collection(ETBSModel.ConfirmedTicket_Result)" />
+          <FunctionImport Name="DeleteEmp">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteManager">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTravelAgent">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getCount" ReturnType="Collection(ETBSModel.getCount_Result)">
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getCount1" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetDetails" ReturnType="Collection(ETBSModel.GetDetails_Result)">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmpDetails" ReturnType="Collection(ETBSModel.GetEmpDetails_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetManager" ReturnType="Collection(ETBSModel.GetManager_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTravelAgent" ReturnType="Collection(ETBSModel.GetTravelAgent_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUser" ReturnType="Collection(ETBSModel.GetUser_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUser1" ReturnType="Collection(ETBSModel.GetUser1_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MyUser">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="usertypeid" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spEmpCheckLoginDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spexample">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+            <Parameter Name="ManagerStatus" Mode="In" Type="String" />
+            <Parameter Name="loginid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateApproveRequest">
+            <Parameter Name="RequestId" Mode="In" Type="Int32" />
+            <Parameter Name="ManagerStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEmp">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateManager">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTravelAgent">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="loginid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UserDetails" ReturnType="Collection(ETBSModel.UserDetails_Result)" />
+          <FunctionImport Name="usp_TravelRequests_Travelagent" ReturnType="Collection(ETBSModel.usp_TravelRequests_Travelagent_Result)" />
+          <FunctionImport Name="ViewEmpDetails" ReturnType="Collection(ETBSModel.ViewEmpDetails_Result)" />
+          <FunctionImport Name="ViewManagerDetails" ReturnType="Collection(ETBSModel.ViewManagerDetails_Result)" />
+          <FunctionImport Name="ViewTravelAgentDetails" ReturnType="Collection(ETBSModel.ViewTravelAgentDetails_Result)" />
+        </EntityContainer>
+        <ComplexType Name="spGetTravelRequestDetails_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="spGetTravelRequestDetails1_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spApprovedRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetNewRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetRecordsById_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spHistoryRecords_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spRejectedRequest_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetNewRequests_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="viewCancel_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ConfirmedTicket_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getCount_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Salt" Nullable="true" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+          <Property Type="Int32" Name="Ticket_Count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetDetails_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetEmpDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetManager_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetTravelAgent_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetUser_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUser1_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UserDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_TravelRequests_Travelagent_Result">
+          <Property Type="Int32" Name="RequestId" Nullable="false" />
+          <Property Type="DateTime" Name="RequestDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FromLocation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ToLocation" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Medium" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CurrentStatus" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ManagerStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ManagerId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ViewEmpDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ViewManagerDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ViewTravelAgentDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="LoginId" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="ManagerUserId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ETBSModelStoreContainer" CdmEntityContainer="EmpTravelBookingSystemEntities">
+          <EntitySetMapping Name="TravelRequests">
+            <EntityTypeMapping TypeName="ETBSModel.TravelRequest">
+              <MappingFragment StoreEntitySet="TravelRequests">
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ETBSModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+                <ScalarProperty Name="Ticket_Count" ColumnName="Ticket_Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="ETBSModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCancelTicket" FunctionName="ETBSModel.Store.spCancelTicket" />
+          <FunctionImportMapping FunctionImportName="AddTravelRequest3" FunctionName="ETBSModel.Store.AddTravelRequest" />
+          <FunctionImportMapping FunctionImportName="spGetTravelRequestDetails1" FunctionName="ETBSModel.Store.spGetTravelRequestDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spGetTravelRequestDetails1_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spApprovedRequest" FunctionName="ETBSModel.Store.spApprovedRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spApprovedRequest_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetRecordsById" FunctionName="ETBSModel.Store.spGetRecordsById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spGetRecordsById_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spHistoryRecords" FunctionName="ETBSModel.Store.spHistoryRecords">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spHistoryRecords_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spRejectedRequest" FunctionName="ETBSModel.Store.spRejectedRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spRejectedRequest_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetNewRequests" FunctionName="ETBSModel.Store.spGetNewRequests">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.spGetNewRequests_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="viewCancel" FunctionName="ETBSModel.Store.viewCancel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.viewCancel_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddEmployee" FunctionName="ETBSModel.Store.AddEmployee" />
+          <FunctionImportMapping FunctionImportName="AddEmployee1" FunctionName="ETBSModel.Store.AddEmployee1" />
+          <FunctionImportMapping FunctionImportName="addmanager" FunctionName="ETBSModel.Store.addmanager" />
+          <FunctionImportMapping FunctionImportName="addmyusers" FunctionName="ETBSModel.Store.addmyusers" />
+          <FunctionImportMapping FunctionImportName="addtravelagent" FunctionName="ETBSModel.Store.addtravelagent" />
+          <FunctionImportMapping FunctionImportName="AssignManager" FunctionName="ETBSModel.Store.AssignManager" />
+          <FunctionImportMapping FunctionImportName="ChangeManager" FunctionName="ETBSModel.Store.ChangeManager" />
+          <FunctionImportMapping FunctionImportName="ChangeTravelStatus" FunctionName="ETBSModel.Store.ChangeTravelStatus" />
+          <FunctionImportMapping FunctionImportName="ChangeTravelStatus1" FunctionName="ETBSModel.Store.ChangeTravelStatus1" />
+          <FunctionImportMapping FunctionImportName="ConfirmedTicket" FunctionName="ETBSModel.Store.ConfirmedTicket">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.ConfirmedTicket_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteEmp" FunctionName="ETBSModel.Store.DeleteEmp" />
+          <FunctionImportMapping FunctionImportName="DeleteManager" FunctionName="ETBSModel.Store.DeleteManager" />
+          <FunctionImportMapping FunctionImportName="DeleteTravelAgent" FunctionName="ETBSModel.Store.DeleteTravelAgent" />
+          <FunctionImportMapping FunctionImportName="getCount" FunctionName="ETBSModel.Store.getCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.getCount_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+                <ScalarProperty Name="Ticket_Count" ColumnName="Ticket_Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getCount1" FunctionName="ETBSModel.Store.getCount1" />
+          <FunctionImportMapping FunctionImportName="GetDetails" FunctionName="ETBSModel.Store.GetDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetDetails_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmpDetails" FunctionName="ETBSModel.Store.GetEmpDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetEmpDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetManager" FunctionName="ETBSModel.Store.GetManager">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetManager_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTravelAgent" FunctionName="ETBSModel.Store.GetTravelAgent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetTravelAgent_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="ETBSModel.Store.GetUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetUser_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUser1" FunctionName="ETBSModel.Store.GetUser1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.GetUser1_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MyUser" FunctionName="ETBSModel.Store.MyUser" />
+          <FunctionImportMapping FunctionImportName="spEmpCheckLoginDetails" FunctionName="ETBSModel.Store.spEmpCheckLoginDetails" />
+          <FunctionImportMapping FunctionImportName="spexample" FunctionName="ETBSModel.Store.spexample" />
+          <FunctionImportMapping FunctionImportName="spUpdateApproveRequest" FunctionName="ETBSModel.Store.spUpdateApproveRequest" />
+          <FunctionImportMapping FunctionImportName="UpdateEmp" FunctionName="ETBSModel.Store.UpdateEmp" />
+          <FunctionImportMapping FunctionImportName="UpdateManager" FunctionName="ETBSModel.Store.UpdateManager" />
+          <FunctionImportMapping FunctionImportName="UpdateTravelAgent" FunctionName="ETBSModel.Store.UpdateTravelAgent" />
+          <FunctionImportMapping FunctionImportName="UserDetails" FunctionName="ETBSModel.Store.UserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.UserDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_TravelRequests_Travelagent" FunctionName="ETBSModel.Store.usp_TravelRequests_Travelagent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.usp_TravelRequests_Travelagent_Result">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="FromLocation" ColumnName="FromLocation" />
+                <ScalarProperty Name="ToLocation" ColumnName="ToLocation" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="ManagerStatus" ColumnName="ManagerStatus" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ViewEmpDetails" FunctionName="ETBSModel.Store.ViewEmpDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.ViewEmpDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ViewManagerDetails" FunctionName="ETBSModel.Store.ViewManagerDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.ViewManagerDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ViewTravelAgentDetails" FunctionName="ETBSModel.Store.ViewTravelAgentDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ETBSModel.ViewTravelAgentDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManagerUserId" ColumnName="ManagerUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
