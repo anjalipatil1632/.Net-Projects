@@ -1,0 +1,40 @@
+
+create database angularproject
+use angularproject
+
+CREATE TABLE [dbo].[tbl_exceldata] (
+
+    [Sr_no]    INT            IDENTITY (1, 1) NOT NULL,
+
+    [SLA]    VARCHAR (Max) NULL,
+
+    [Incident_Number] NVARCHAR (MAX) NULL,
+
+    [Priority]     NVARCHAR (MAX)  NULL,
+
+    [Assignment_Group]  NVARCHAR (MAX) NULL,
+
+    [State]     NVARCHAR (MAX) NULL,
+
+	[Start_Time]     NVARCHAR (MAX) NULL,
+
+	[Actual_Time_Left]     NVARCHAR (MAX) NULL,
+
+    [Actual_Elapsed_Percentage]     NVARCHAR (MAX) NULL,
+
+    CONSTRAINT [PK_tbl_exceldata] PRIMARY KEY CLUSTERED ([Sr_no] ASC)
+
+);
+
+/*exec sp_rename 'tbl_exceldata.Number','Incident_Number','column'*/
+
+ALTER TABLE tbl_exceldata
+ALTER COLUMN SLA varchar(Max);
+
+ EXEC sp_help 'tbl_exceldata'
+
+
+select * from tbl_exceldata
+
+
+truncate table tbl_exceldata
